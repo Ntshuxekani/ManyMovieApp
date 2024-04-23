@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -6,16 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  name!: string;
-  email!: string;
-  password!: string;
 
-  onSubmit() {
-    console.log('Registration form submitted!');
-    console.log(`Name: ${this.name}`);
-    console.log(`Email: ${this.email}`);
-    console.log(`Password: ${this.password}`);
-  }
+  registerForm=this.fb.group({
+    name:['',[Validators.required]],
+    email:['',[Validators.required,Validators.email]],
+    password:['',[Validators.required]]
+  })
+  constructor(private fb:FormBuilder){}
+get email(){
+  return this.registerForm.controls['email'];
+}
+get password(){
+  return this.registerForm.controls['password'];
+}
 }
 
 

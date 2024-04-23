@@ -1,12 +1,44 @@
-<form (ngSubmit)="onSubmit()">
-    <label> Name: <input type="text" [(ngModel)]="name" name="name" required>
-    </label>
-    <br>
-    <label> Email: <input type="email" [(ngModel)]="email" name="email" required>
-    </label>
-    <br>
-    <label> Password: <input type="password" [(ngModel)]="password" name="password" required>
-    </label>
-    <br>
-    <button type="submit">Submit</button>
+<form [formGroup]="registerForm">
+  <div class="card"  [style]="{width:'360px'}">
+    <div class="card-header">
+      <h3>Sign Up</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" id="exampleInputName"  formControlName="name" placeholder="Enter name">
+       <br>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="email" placeholder="Enter email">
+        <small class="block p-error" *ngIf="email.invalid&&(email.dirty||email.touched)">
+          <div *ngIf="email.errors?.['required']">Email is required</div>
+          <div *ngIf="email.errors?.['email']">Invalid email</div>
+        
+        </small>
+      
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword"  formControlName="password" placeholder="password">
+     
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="inputPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="inputPassword"  formControlName="passwordConfirm" placeholder=" confirm password">
+        <small id="confirmPassword" class="form-text text-muted"></small>
+     
+      </div>
+     
+      <br>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">Register</button>
+      </div>
+      <small id="loginRoute" class="form-text text-muted">Already a member? <a routerLink="/login">Sign in</a></small>
+    
+    </div>
+  </div>
+   
   </form>

@@ -7,42 +7,97 @@
     background-attachment: fixed;
     background-position: center;
     padding: 0;
-    //border: 11px solid black;
+   // border: 11px solid black;
+    display:flex;
+    align-items: center;
 
 
 }
-.content{
-   // border: 11px solid rgb(240, 17, 17);
-    display:flex;
-  
-    width:100%;
-    height: 100%;
+.container1{
+    border: 11px solid rgb(240, 140, 17);
+    display: flex;
     align-items: center;
-    margin-right: auto;
+    width: 100%;
+    height: 100%;
+}
+.content{
+   border: 11px solid rgb(17, 240, 36);
+   display:block;
+   margin: 0 auto;
+    width:88%;
+    height: 80%;
+    align-items: center;
+   padding-bottom: 0;
+  
    
 
 }
 .buttons{
+    border: 11px solid rgb(246, 245, 245);
     display: inline-flex;
-    height: 77px;
-    justify-content: space-evenly;
-   width:45%;
+    height: 88px;
+    justify-content:center;
+    
+   width:100%;
+   margin-bottom: 17px;
    
     
    
 }
+.buttons>.btn:nth-child(1){
+    margin-right: 25px;
+}
+.buttons>.btn:nth-child(2){
+    margin-left: 25px;
+}
 .btn{
+    
     border-radius: 22px;
     border: none;
     height: 60px;
-    width: 148px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    width: 169px;
+    background: linear-gradient(135deg, rgb(153, 150, 150), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
 }
+
 .Title{
-    display: flex;
+    padding-top: 8%;
+    display: block;
+  color: white;
+   border: 11px solid rgb(240, 17, 17);
+   bottom:0
 }
+li {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #eee;
+    color: rgba(0, 0, 0, );
+    border-radius: 20px;
+    margin: 10px;
+   
+}
+li:nth-child(3) {
+
+    background-color: transparent;
+    color: antiquewhite;
+}
+li:nth-child(4) {
+
+    background-color: transparent;
+    color: antiquewhite;
+}
+ul{
+   // border: 11px solid rgb(240, 17, 17);
+    margin-left: 0;
+    padding: 0;
+
+}
+.description{
+    width:300px;
+    height:auto;
+}
+

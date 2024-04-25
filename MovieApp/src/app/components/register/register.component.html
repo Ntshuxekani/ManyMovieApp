@@ -1,4 +1,6 @@
-<div class="content"><form [formGroup]="registerForm">
+<div class="content">
+  
+  <form [formGroup]="registerForm"(ngSubmit)="register()">
   <div class="card" style="width: 27rem;">
    
       <h3 class="card-head">Sign Up</h3>
@@ -37,7 +39,7 @@
       <div class="d-grid gap-2">
         <button class="btn btn-primary" type="button">Register</button>
       </div>
-      <small id="loginRoute" class="form-text text-muted">Already a member? <a routerLink="/login">Sign in</a></small>
+      <small id="loginRoute" class="form-text text-muted">Already a member? <a routerLink="/landing-page">Sign in</a></small>
     
     </div>
   </div>

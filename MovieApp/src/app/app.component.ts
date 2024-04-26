@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+movies: any;
+searchMovies() {
+throw new Error('Method not implemented.');
+}
   title = 'MovieApp';
 }

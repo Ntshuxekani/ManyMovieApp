@@ -5,18 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { MovieCardComponent } from './components/moviecard/moviecard.component';
+import { MovieService } from './services/movie.service';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WatchlistComponent,
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

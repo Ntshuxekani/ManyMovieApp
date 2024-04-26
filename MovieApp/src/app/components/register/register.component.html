@@ -14,32 +14,31 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="email" placeholder="Enter email">
-        <small class="block p-error" *ngIf="email.invalid&&(email.dirty||email.touched)">
-          <div *ngIf="email.errors?.['required']">Email is required</div>
-          <div *ngIf="email.errors?.['email']">Invalid email</div>
-        
-        </small>
+        <small *ngIf = "registerForm.get('email')?.errors&&registerForm.get('email')?.touched" class="comment">Email Invalid</small>
+ 
+      
         <br>
       
       </div>
       <div class="form-group">
         <label for="inputPassword">Password</label>
         <input type="password" class="form-control" id="inputPassword"  formControlName="password" placeholder="password">
+        <small class="comment" *ngIf="registerForm.get('password')?.value.length<8&&registerForm.get('password')?.touched"> Password too short, min 8 characters</small>
      
       </div>
       <br>
       <div class="form-group">
         <label for="inputPassword">Confirm Password</label>
-        <input type="password" class="form-control" id="inputPassword"  formControlName="passwordConfirm" placeholder=" confirm password">
-        <small id="confirmPassword" class="form-text text-muted"></small>
+        <input type="password" class="form-control" id="inputPasswordConfirm"  formControlName="passwordConfirm" placeholder=" confirm password">
+        <small class="comment" *ngIf="registerForm.get('passwordConfirm')?.value!=registerForm.get('password')?.value&&registerForm.get('password')?.touched"> Passwords do not Match</small>
      
       </div>
      
       <br>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button">Register</button>
+        <button class="btn btn-primary" type="button" (click)="register()" [disabled]="!registerForm.valid">Register</button>
       </div>
-      <small id="loginRoute" class="form-text text-muted">Already a member? <a routerLink="/landing-page">Sign in</a></small>
+      <small class="form-text text-muted">Already a member? <a routerLink="/landing-page">Sign in</a></small>
     
     </div>
   </div>

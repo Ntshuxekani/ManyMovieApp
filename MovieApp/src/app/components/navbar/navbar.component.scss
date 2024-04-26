@@ -1,63 +1,48 @@
-*{
-    padding: 0;
-    margin: 0 ;
+    .navbar {
+    background-color: #34495e; /* Dark blue */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #111;
-    position: sticky;
-    top: 0;
-  }
 
+.logo {
+    margin: 0;
+    color: #fff; /* White text color */
+}
 
-  .navbar-brand {
-    flex: 0 0 auto;
-  }
-  
-  .logo {
-   
-    background-color: white;
-  }
-  
-  .nav-links {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .nav-links li {
-    margin: 0 20px;
-  }
-  
-  .nav-links li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .nav-actions {
-    flex: 0 0 auto;
-  }
-  .box{
-    background-color: #fff;
-    width: 170px;
-    height: 50px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 25px;
-  }
-  input{
-    width: 240px;
+.search-input {
+    padding: 8px;
     border: none;
-    outline: none;
-    background: none;
-    font-size: 18px;
-    
-  }
-  
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 200px;
+}
+
+.search-button {
+    background-color: #2980b9; /* Blue */
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #1f618d; /* Darker blue on hover */
+}
+
+.register-btn, .login-btn {
+    background-color: #3498db; /* Light blue */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover, .login-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}

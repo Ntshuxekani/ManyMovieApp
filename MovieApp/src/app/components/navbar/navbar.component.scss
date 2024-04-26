@@ -1,9 +1,15 @@
+*{
+    padding: 0;
+    margin: 0 ;
+}
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
     background-color: #111;
+    position: sticky;
+    top: 0;
   }
 
 
@@ -12,7 +18,8 @@
   }
   
   .logo {
-    width: 120px;
+   
+    background-color: white;
   }
   
   .nav-links {
@@ -34,5 +41,23 @@
   
   .nav-actions {
     flex: 0 0 auto;
+  }
+  .box{
+    background-color: #fff;
+    width: 170px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 25px;
+  }
+  input{
+    width: 240px;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 18px;
+    
   }
   

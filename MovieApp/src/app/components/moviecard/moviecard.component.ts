@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { MovieService } from '../services/movie.service';
-import { MovieService } from 'src/app/services/movie-service.service';
+import { MovieService } from 'src/app/services/movieservice/movie-service.service';
+import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 @Component({
   selector: 'app-moviecard',
   templateUrl: './moviecard.component.html',
@@ -10,7 +11,10 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   searchQuery: string = '';
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService,
+    private watchlistService: WatchlistService
+  ) { }
 
   ngOnInit(): void {
      this.movieService.getPopularMovies().subscribe((data:any)=>{
@@ -26,5 +30,19 @@ export class MovieCardComponent implements OnInit {
 
   searchMovies(): void {
     this.getMovies(this.searchQuery);
+  }
+  addToWatchlist(imdbID: string): void {
+    this.watchlistService.addToWatchlist(imdbID);
+  }
+
+  removeFromWatchlist(imdbID: string): void {
+    this.watchlistService.removeFromWatchlist(imdbID);
+  }
+
+  isInWatchlist(imdbID: string): boolean {
+    return this.watchlistService.isInWatchlist(imdbID);
+  }
+getWatchlist(): any[] {
+    return this.watchlistService.getWatchlist();
   }
 }

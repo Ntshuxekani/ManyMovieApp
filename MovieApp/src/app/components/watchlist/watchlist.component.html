@@ -1,0 +1,15 @@
+<div class="watchlist row">
+    <h2>My Watchlist</h2>
+    <div *ngFor="let movie of movies" class="movie-card col-md-4">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}"> 
+    <h3>{{ movie.title }}</h3>
+    <p>{{ movie.release_date }}</p>
+    <p>{{movie.overview}}</p>
+    <p>IMDB Rating: {{movie.vote_average}}</p>
+      <button (click)="removeFromWatchlist(movie.imdbID)">Remove from Watchlist</button>
+    </div>
+  </div>
+  
+
+
+ 

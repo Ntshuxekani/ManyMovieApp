@@ -6,15 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MovieService {
+  private apiKey = '50f3bba3274791adf6d76141851adb37';
+
   constructor(private http: HttpClient) { }
 
-  getMovies(searchQuery: string, sortBy: string): Observable<any> {
-    let url = `https://www.omdbapi.com/?apikey=f45065da&s=${searchQuery}&type=movie&plot=short`;
-    if (sortBy === 'latest') {
-      url += '&y=2024'; // Assuming you want to get the latest movies of 2024
-    }
-    
-    // Add more conditions for other sorting options if needed
+  getPopularMovies(): Observable<any> {
+    let url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}`;
+    return this.http.get(url);
+  }
+
+  searchMovies(query: string): Observable<any> {
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${query}`;
     return this.http.get(url);
   }
 }

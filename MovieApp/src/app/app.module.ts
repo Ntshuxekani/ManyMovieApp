@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MovieCardComponent } from './moviecard/moviecard.component';
+import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { MovieService } from './services/movie-service.service';
 @NgModule({
   declarations: [

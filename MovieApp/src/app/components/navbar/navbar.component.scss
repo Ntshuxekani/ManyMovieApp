@@ -4,6 +4,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    height: 70px;
 }
 
 .logo {
@@ -14,20 +16,10 @@
 .search-input {
     padding: 8px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     margin-right: 10px;
     width: 200px;
 }
-
-.search-button {
-    background-color: #2980b9; /* Blue */
-    border: none;
-    border-radius: 5px;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
 .search-button:hover {
     background-color: #1f618d; /* Darker blue on hover */
 }

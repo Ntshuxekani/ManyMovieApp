@@ -1,0 +1,117 @@
+
+.root-container{
+    width:100%;
+    height:100vh;
+    background-image: url("/assets/avatar.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    background-position: center;
+    padding: 0;
+   // border: 11px solid black;
+    display:flex;
+    align-items: center;
+
+
+}
+.container1{
+  //  border: 11px solid rgb(35, 9, 233);
+    display: flex;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+}
+.content{
+  // border: 11px solid rgb(17, 240, 36);
+   display:block;
+   margin: 0 auto;
+   position:relative;
+    width:88%;
+    height: 80%;
+    align-items: center;
+   padding-bottom: 0;
+  
+   
+
+}
+.buttons{
+  //  border: 11px solid rgb(246, 245, 245);
+    display: inline-flex;
+    height: 88px;
+    justify-content:center;
+    
+   width:100%;
+   margin-top: 9%;
+   
+    
+   
+}
+.buttons>.btn:nth-child(1){
+    margin-right: 25px;
+}
+.buttons>.btn:nth-child(2){
+    margin-left: 25px;
+}
+.btn{
+    
+    border-radius: 22px;
+    border: none;
+    height: 60px;
+    width: 169px;
+    background: linear-gradient(135deg, rgb(153, 150, 150), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+}
+
+.Title{
+ 
+    display: block;
+  color: white;
+ //  border: 11px solid rgb(240, 17, 17);
+   position:absolute;
+   bottom:0;
+   margin-left: 4%;
+}
+
+li {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:135px;
+    background-color: #eee;
+    color: rgba(0, 0, 0, );
+    border-radius: 20px;
+    margin: 10px;
+  text-align: center;
+   
+}
+li:nth-child(3) {
+
+    background-color: transparent;
+    color: antiquewhite;
+}
+li:nth-child(4) {
+
+    background-color: transparent;
+    color: antiquewhite;
+}
+ul{
+  // border: 9px solid rgb(240, 17, 17);
+    margin-left:0;
+    padding: 0;
+    left: 0;
+
+}
+.description{
+
+  
+   width:300px;
+    height:auto;
+}
+

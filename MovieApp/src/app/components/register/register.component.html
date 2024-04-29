@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div class="content">
+  
+  <form [formGroup]="registerForm"(ngSubmit)="register()">
+  <div class="card" style="width: 27rem;">
+   
+      <h3 class="card-head">Sign Up</h3>
+  
+    <div class="card-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" id="exampleInputName"  formControlName="name" placeholder="Enter name">
+       <br>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="email" placeholder="Enter email">
+        <small *ngIf = "registerForm.get('email')?.errors&&registerForm.get('email')?.touched" class="comment">Email Invalid</small>
+ 
+      
+        <br>
+      
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword"  formControlName="password" placeholder="password">
+        <small class="comment" *ngIf="registerForm.get('password')?.value.length<8&&registerForm.get('password')?.touched"> Password too short, min 8 characters</small>
+     
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="inputPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="inputPasswordConfirm"  formControlName="passwordConfirm" placeholder=" confirm password">
+        <small class="comment" *ngIf="passwordsMatch() "> Passwords do not Match</small>
+     
+      </div>
+     
+      <br>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" (click)="register()" [disabled]="!registerForm.valid||passwordsMatch()">Register</button>
+      </div>
+      <small class="form-text text-muted">Already a member? <a routerLink="/login">Sign in</a></small>
+    
+    </div>
+  </div>
+   
+  </form>
+  </div>

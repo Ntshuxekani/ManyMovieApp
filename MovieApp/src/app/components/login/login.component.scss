@@ -1,0 +1,32 @@
+.content{
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+    background-attachment: fixed;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+img{
+    opacity: 0.3;
+}
+
+
+.card{
+
+    background-color: black;
+    padding: 9px;
+    opacity: 0.8;
+
+}
+
+
+.form-group{
+    color:rgb(217, 214, 211)
+
+}
+.card-head{
+    color: rgb(217, 214, 211);
+    text-align: center;
+}

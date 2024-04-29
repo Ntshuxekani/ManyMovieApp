@@ -1,0 +1,15 @@
+<br/>
+<div class="search box  ">
+  <input type="text" placeholder="Search movies..." [(ngModel)]="searchQuery" (input)="searchMovies()">
+</div>
+<div class="movie-cards row">
+  <div *ngFor="let movie of movies" class="movie-card col-md-4">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+    <h3>{{ movie.title }}</h3>
+    <p>{{ movie.release_date }}</p>
+    <p>{{movie.overview}}</p>
+    <p>IMDB Rating: {{movie.vote_average}}</p>
+    <button *ngIf="!isInWatchlist(movie.id)" (click)="addToWatchlist(movie.id)">Add to Watchlist</button>
+    <button *ngIf="isInWatchlist(movie.id)" (click)="removeFromWatchlist(movie.id)">Remove from Watchlist</button>
+  </div>
+</div>

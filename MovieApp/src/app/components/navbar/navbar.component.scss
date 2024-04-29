@@ -1,0 +1,40 @@
+    .navbar {
+    background-color: #34495e; /* Dark blue */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    height: 70px;
+}
+
+.logo {
+    margin: 0;
+    color: #fff; /* White text color */
+}
+
+.search-input {
+    padding: 8px;
+    border: none;
+    border-radius: 50px;
+    margin-right: 10px;
+    width: 200px;
+}
+.search-button:hover {
+    background-color: #1f618d; /* Darker blue on hover */
+}
+
+.register-btn, .login-btn {
+    background-color: #3498db; /* Light blue */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover, .login-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}

@@ -30,15 +30,15 @@
       <div class="form-group">
         <label for="inputPassword">Confirm Password</label>
         <input type="password" class="form-control" id="inputPasswordConfirm"  formControlName="passwordConfirm" placeholder=" confirm password">
-        <small class="comment" *ngIf="registerForm.get('passwordConfirm')?.value!=registerForm.get('password')?.value&&registerForm.get('password')?.touched"> Passwords do not Match</small>
+        <small class="comment" *ngIf="passwordsMatch() "> Passwords do not Match</small>
      
       </div>
      
       <br>
       <div class="d-grid gap-2">
-        <button class="btn btn-primary" type="button" (click)="register()" [disabled]="!registerForm.valid">Register</button>
+        <button class="btn btn-primary" type="button" (click)="register()" [disabled]="!registerForm.valid||passwordsMatch()">Register</button>
       </div>
-      <small class="form-text text-muted">Already a member? <a routerLink="/landing-page">Sign in</a></small>
+      <small class="form-text text-muted">Already a member? <a routerLink="/login">Sign in</a></small>
     
     </div>
   </div>

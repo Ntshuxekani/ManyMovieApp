@@ -25,10 +25,13 @@ email: any;
       password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
     });
-    if(this.registerForm.get('email')?.touched)
-    {
-      console.log("email is touched");
-    }
+    // if(this.registerForm.get('email')?.touched)
+    // {
+    //   console.log("email is touched");
+    // }
+  }
+  passwordsMatch() {
+    return this.registerForm.get('passwordConfirm')?.value != this.registerForm.get('password')?.value && this.registerForm.get('password')?.touched;
   }
  
    numUsers=0;

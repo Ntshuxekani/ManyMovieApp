@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LogoutComponent } from './components/logout/logout.component';
 const routes: Routes = [
   {path:"", redirectTo:"/home", pathMatch:"full"},
   {path:"register",component:RegisterComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:"home",component:MovieCardComponent},
   { path: 'watchlist', component: WatchlistComponent },
   {path:'landing-page',component:LandingPageComponent},
-  {path:"review-movie", component:ReviewMovieComponent}
+  {path:"review-movie", component:ReviewMovieComponent},
+  {path:"logout", component:LogoutComponent}
 
 ];
 @NgModule({

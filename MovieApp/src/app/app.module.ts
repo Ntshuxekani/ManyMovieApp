@@ -14,6 +14,7 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LogoutComponent } from './components/logout/logout.component';
 const routes: Routes = [
   { path: 'register', 
   component: RegisterComponent }
@@ -28,7 +29,8 @@ const routes: Routes = [
     MovieCardComponent,
     WatchlistComponent,
     ReviewMovieComponent,
-   NavbarComponent
+   NavbarComponent,
+   LogoutComponent
   ],
   imports: [
     BrowserModule,

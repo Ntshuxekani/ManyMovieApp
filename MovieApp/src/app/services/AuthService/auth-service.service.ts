@@ -1,5 +1,5 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
+  authChanged = new Subject<boolean>(); // Subject for notifying authentication state changes
 
   constructor() { }
 
@@ -14,12 +15,14 @@ export class AuthService {
     this.isLoggedIn = true;
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
+    this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
 
   logout(): void {
     this.isLoggedIn = false;
     this.loggedInUserEmail = '';
     localStorage.removeItem('loggedInUserEmail');
+    this.authChanged.next(false); // Notify subscribers that authentication state has changed
   }
 
   getIsLoggedIn(): boolean {

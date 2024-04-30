@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/AuthService/auth-service.service';
 import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 import { MovieService } from 'src/app/services/movieservice/movie-service.service';
+
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
@@ -11,12 +13,14 @@ export class WatchlistComponent implements OnInit {
   movies: any[] = [];
 
   constructor(
+    private authService: AuthService,
     private watchlistService: WatchlistService,
     private movieService: MovieService
   ) { }
 
   ngOnInit(): void {
-    this.watchlist = this.watchlistService.getWatchlist();
+    const userEmail = this.authService.getLoggedInUserEmail();
+    this.watchlist = this.watchlistService.getWatchlist(userEmail);
     this.getMoviesDetails();
   }
 
@@ -29,8 +33,9 @@ export class WatchlistComponent implements OnInit {
   }
 
   removeFromWatchlist(imdbID: string): void {
-    this.watchlistService.removeFromWatchlist(imdbID);
-    this.movies = this.movies.filter(movie => movie.imdbID !== imdbID)[0  ];
+    const userEmail = this.authService.getLoggedInUserEmail();
+    this.watchlistService.removeFromWatchlist(userEmail, imdbID);
+    this.movies = this.movies.filter(movie => movie.id !== imdbID);
   }
 
 }

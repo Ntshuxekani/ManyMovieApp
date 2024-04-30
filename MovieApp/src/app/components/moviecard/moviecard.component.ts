@@ -1,8 +1,9 @@
-// moviecard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movieservice/movie-service.service';
 import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 import { MovieCommunicationService } from 'src/app/services/MovieComservice/moviecomservice.service';
+import { AuthService } from 'src/app/services/AuthService/auth-service.service';
+
 @Component({
   selector: 'app-moviecard',
   templateUrl: './moviecard.component.html',
@@ -11,18 +12,24 @@ import { MovieCommunicationService } from 'src/app/services/MovieComservice/movi
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   searchQuery: string = '';
+  userEmail: string = '';
 
   constructor(
     private movieService: MovieService,
     private watchlistService: WatchlistService,
-    private movieCommunicationService: MovieCommunicationService // Inject the communication service
+    private movieCommunicationService: MovieCommunicationService,
+    private authService: AuthService 
   ) { }
 
   ngOnInit(): void {
     this.movieService.getPopularMovies().subscribe((data:any)=>{
       this.movies=data.results;
     });
-
+  
+    if (this.authService.getIsLoggedIn()) {
+      this.userEmail = this.authService.getLoggedInUserEmail();
+    }
+  
     // Subscribe to changes in the search query
     this.movieCommunicationService.searchQuery$.subscribe(query => {
       if (query.trim() !== '') {
@@ -34,7 +41,7 @@ export class MovieCardComponent implements OnInit {
       }
     });
   }
-
+  
   getMovies(searchQuery: string): void {
     this.movieService.searchMovies(searchQuery).subscribe((data: any) => {
       this.movies = data.results;
@@ -42,18 +49,30 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToWatchlist(imdbID: string): void {
-    this.watchlistService.addToWatchlist(imdbID);
+    if (this.userEmail) {
+      this.watchlistService.addToWatchlist(this.userEmail, imdbID);
+    } else {
+      alert('Please log in to add movies to your watchlist.');
+    }
   }
 
   removeFromWatchlist(imdbID: string): void {
-    this.watchlistService.removeFromWatchlist(imdbID);
+    if (this.userEmail) {
+      this.watchlistService.removeFromWatchlist(this.userEmail, imdbID);
+    }
   }
 
   isInWatchlist(imdbID: string): boolean {
-    return this.watchlistService.isInWatchlist(imdbID);
+    if (this.userEmail) {
+      return this.watchlistService.isInWatchlist(this.userEmail, imdbID);
+    }
+    return false;
   }
 
   getWatchlist(): any[] {
-    return this.watchlistService.getWatchlist();
+    if (this.userEmail) {
+      return this.watchlistService.getWatchlist(this.userEmail);
+    }
+    return [];
   }
 }

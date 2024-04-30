@@ -1,28 +1,38 @@
-import { Component } from '@angular/core';
-import { MovieService } from 'src/app/services/movieservice/movie-service.service';
-import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
+// navbar.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/AuthService/auth-service.service';
+import { MovieCommunicationService } from 'src/app/services/MovieComservice/moviecomservice.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  movies: any[] = [];
+export class NavbarComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  userEmail: string = '';
   searchQuery: string = '';
-  constructor(
-    private movieService: MovieService,
-    private watchlistService: WatchlistService
-  ) { }
 
-  getMovies(searchQuery: string): void {
-    this.movieService.searchMovies(searchQuery).subscribe((data: any) => {
-      this.movies = data.results;
-    });
+  constructor(private authService: AuthService, private movieCommunicationService: MovieCommunicationService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.getIsLoggedIn();
+    if (this.isLoggedIn) {
+      this.userEmail = this.authService.getLoggedInUserEmail();
+    }
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.userEmail = '';
+  }
+
   searchMovies(): void {
-    this.getMovies(this.searchQuery);
+    this.movieCommunicationService.setSearchQuery(this.searchQuery); // Use the service to set the search query
   }
-  getWatchlist(): any[] {
-    return this.watchlistService.getWatchlist();
+
+  navigateHome(): void {
+    this.router.navigate(['/home']);
   }
 }

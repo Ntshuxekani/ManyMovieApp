@@ -8,7 +8,7 @@ import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 const routes: Routes = [
-  {path:"", redirectTo:"/home", pathMatch:"full"},
+  {path:"", redirectTo:"home", pathMatch:"full"},
   {path:"register",component:RegisterComponent},
   {path:"login", component:LoginComponent},
   {path:"home",component:MovieCardComponent},

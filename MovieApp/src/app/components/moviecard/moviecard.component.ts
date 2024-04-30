@@ -1,6 +1,8 @@
+// moviecard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movieservice/movie-service.service';
 import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
+import { MovieCommunicationService } from 'src/app/services/MovieComservice/moviecomservice.service';
 @Component({
   selector: 'app-moviecard',
   templateUrl: './moviecard.component.html',
@@ -12,13 +14,25 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private watchlistService: WatchlistService
+    private watchlistService: WatchlistService,
+    private movieCommunicationService: MovieCommunicationService // Inject the communication service
   ) { }
 
   ngOnInit(): void {
-     this.movieService.getPopularMovies().subscribe((data:any)=>{
+    this.movieService.getPopularMovies().subscribe((data:any)=>{
       this.movies=data.results;
-     });
+    });
+
+    // Subscribe to changes in the search query
+    this.movieCommunicationService.searchQuery$.subscribe(query => {
+      if (query.trim() !== '') {
+        this.getMovies(query);
+      } else {
+        this.movieService.getPopularMovies().subscribe((data:any)=>{
+          this.movies=data.results;
+        });
+      }
+    });
   }
 
   getMovies(searchQuery: string): void {
@@ -27,9 +41,6 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  searchMovies(): void {
-    this.getMovies(this.searchQuery);
-  }
   addToWatchlist(imdbID: string): void {
     this.watchlistService.addToWatchlist(imdbID);
   }
@@ -41,7 +52,8 @@ export class MovieCardComponent implements OnInit {
   isInWatchlist(imdbID: string): boolean {
     return this.watchlistService.isInWatchlist(imdbID);
   }
-getWatchlist(): any[] {
+
+  getWatchlist(): any[] {
     return this.watchlistService.getWatchlist();
   }
 }

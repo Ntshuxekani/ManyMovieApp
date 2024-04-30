@@ -1,40 +1,71 @@
-    .navbar {
-    background-color: #34495e; /* Dark blue */
-    padding: 10px 20px;
+/* navbar.component.scss */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    height: 70px;
-}
-
-.logo {
-    margin: 0;
-    color: #fff; /* White text color */
-}
-
-.search-input {
-    padding: 8px;
-    border: none;
-    border-radius: 50px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .logo {
+    cursor: pointer;
+  }
+  
+  .search {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search input[type="text"] {
+    padding: 5px;
     margin-right: 10px;
     width: 200px;
-}
-.search-button:hover {
-    background-color: #1f618d; /* Darker blue on hover */
-}
-
-.register-btn, .login-btn {
-    background-color: #3498db; /* Light blue */
-    color: #fff; /* White text color */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.register-btn:hover, .login-btn:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-}
+  }
+  
+  .nav-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .register-btn,
+  .login-btn {
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .search input[type="text"] {
+      width: 150px;
+    }
+  }
+  
+  /* Update button colors to match the new theme */
+  .search button,
+  .register-btn,
+  .login-btn {
+    background-color: #555; /* Use a shade of grey for buttons */
+  }
+  
+  /* Add more specific styles for buttons on hover */
+  .search button:hover,
+  .register-btn:hover,
+  .login-btn:hover {
+    background-color: #777; /* Darker shade of grey on hover */
+  }

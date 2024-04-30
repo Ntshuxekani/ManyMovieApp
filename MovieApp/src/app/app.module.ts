@@ -1,9 +1,9 @@
-import { NgModule, } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule, } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -14,9 +14,9 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+
 const routes: Routes = [
-  { path: 'register', 
-  component: RegisterComponent }
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
@@ -28,7 +28,7 @@ const routes: Routes = [
     MovieCardComponent,
     WatchlistComponent,
     ReviewMovieComponent,
-   NavbarComponent
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +37,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-    
   ],
   providers: [
     MovieService

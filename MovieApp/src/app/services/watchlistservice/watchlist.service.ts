@@ -1,3 +1,4 @@
+// watchlist.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,11 +20,9 @@ export class WatchlistService {
   }
 
   removeFromWatchlist(imdbID: string): void {
-    const index = this.watchlist.indexOf(imdbID);
-    if (index !== -1) {
-      this.watchlist.splice(index, 1);
-    }
+    this.watchlist = this.watchlist.filter(id => id !== imdbID);
   }
+
   isInWatchlist(imdbID: string): boolean {
     return this.watchlist.includes(imdbID);
   }

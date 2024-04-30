@@ -1,23 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { AuthService } from 'src/app/services/AuthService/auth-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  public isLoggedIn: boolean = false;
-  public userEmail: string = '';
 
-  constructor(private formbuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(
+    private formbuilder: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formbuilder.group({
-      email: [''],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -30,20 +33,14 @@ export class LoginComponent {
         });
         if (user) {
           alert('Login Successful');
-          this.userEmail = this.loginForm.value.email;
-          this.isLoggedIn = true;
+          this.authService.login(this.loginForm.value.email); // Update user's authentication state
           this.loginForm.reset();
-          this.router.navigate(["home"]);
+          this.router.navigate(["home"]); // Navigate to the desired page after login
         } else {
           alert("User not found");
         }
       }, err => {
         alert("Something went wrong");
       });
+    }
   }
-
-  logout(): void {
-    this.isLoggedIn = false;
-    this.userEmail = '';
-  }
-}

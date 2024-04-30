@@ -5,15 +5,13 @@
   <div class="search box">
     <input type="text" placeholder="Search movies..." [(ngModel)]="searchQuery">
     <button (click)="searchMovies()">Search</button>
-  </div>
-  <div *ngIf="isLoggedIn; else loginSection" class="nav-actions">
-    <span>Welcome back, {{ userEmail }}</span>
-    <button (click)="logout()">Logout</button>
-    <button routerLink="/watchlist">My Watchlist</button> <!-- Added My Watchlist button -->
-  </div>
-  <ng-template #loginSection>
-    <button routerLink="/watchlist">My Watchlist</button> <!-- Added My Watchlist button -->
-    <button routerLink="/register" class="register-btn">REGISTER</button>
+  </div> 
+  <span *ngIf="isLoggedIn">
+    <button routerLink="/watchlist">My Watchlist</button> 
+    Welcome back, {{ userEmail }}! <button (click)="logout()">Logout</button>
+  </span>
+  <span *ngIf="!isLoggedIn">
+    Do not have an account? <a routerLink="/register">Register</a>
     <button routerLink="/login" class="login-btn">LOGIN</button>
-  </ng-template>
+  </span>
 </div>

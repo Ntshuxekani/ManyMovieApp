@@ -6,7 +6,7 @@ import { ReviewMovieComponent } from './components/review-movie/review-movie.com
 const routes: Routes = [
   {path:"", redirectTo:"navbar", pathMatch:"full"},
   {path:"navbar", component:NavbarComponent},
-  {path:"review-movie", component:ReviewMovieComponent}
+  {path:"reviewmovie", component:ReviewMovieComponent}
 
   
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup ,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReviewService } from 'src/app/services/reviewmovie/review.service';
 
 @Component({
@@ -7,27 +7,41 @@ import { ReviewService } from 'src/app/services/reviewmovie/review.service';
   templateUrl: './review-movie.component.html',
   styleUrls: ['./review-movie.component.scss']
 })
-export class ReviewMovieComponent implements OnInit{
-//public reviewForm!:FormGroup;
-  commentText: string = '';
-  reviewForm!: FormGroup;
-  constructor(private reviewService: ReviewService,private formBuilder: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.reviewForm = new FormGroup({
-      comment: new FormControl()
-    });
+export class ReviewMovieComponent {
+  constructor(private reviewservice: ReviewService) { 
+    
   }
-  submitReview() {
-    if (this.commentText.trim()) {
-      this.reviewService.submitReview(this.commentText).subscribe(
-        response => {
+Movies : any
+
+
+    stars: number[] = [0,1, 2, 3, 4, 5];
+    rating=0;
+    comment: string ='';
+  
+    submitReview() {
+      // Here you can add your submission logic, for example, sending the rating and comment to a server
+      const reviewData = {
+        rating: this.rating,
+        comment: this.comment
+      };
+  
+      // Assuming you have a service named "movieReviewService" to handle the submission
+      this.reviewservice.submitReview(this.comment).subscribe(
+        (response) => {
+          // Handle successful submission
           console.log('Review submitted successfully:', response);
+          // Reset the form after submission
+          this.rating = 0;
+          this.comment = '';
         },
-        error => {
+        (error) => {
+          // Handle error if submission fails
           console.error('Error submitting review:', error);
+          // Optionally, you can display an error message to the user
         }
       );
     }
+  
   }
-}
+
+

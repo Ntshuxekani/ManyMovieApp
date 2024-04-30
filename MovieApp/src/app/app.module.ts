@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes=[
   {path: 'review-movie',
@@ -20,11 +21,13 @@ component: ReviewMovieComponent}
     RegisterComponent,
     NavbarComponent,
     ReviewMovieComponent,
+
    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

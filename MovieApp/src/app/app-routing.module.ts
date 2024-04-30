@@ -3,14 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { MoviePageComponent } from './moviepage/moviepage.component';
 
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/search', pathMatch: 'full' },
+  {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'login',component : LoginComponent},
   {path: 'register', component :RegisterComponent},
-  {path: 'searchbar', component :SearchbarComponent}
+  {path: 'searchbar', component :SearchbarComponent},
+  {path:'moviepage',component:MoviePageComponent}
+  
 ];
 
 @NgModule({

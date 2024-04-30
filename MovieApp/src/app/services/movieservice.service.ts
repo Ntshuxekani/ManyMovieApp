@@ -20,7 +20,7 @@ export class MovieserviceService {
   }
 
   getMovies(): Observable<any> {
-    let url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${this.apiKey}`;
+    let url = `    --url 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1' &page=1&api_key=${this.apiKey}`;
     return this.http.get(url);
   }
 
@@ -28,4 +28,5 @@ export class MovieserviceService {
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${query}`;
     return this.http.get(url);
   }
+
 }

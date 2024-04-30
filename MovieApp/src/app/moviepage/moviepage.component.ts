@@ -29,8 +29,12 @@ export class MoviePageComponent implements OnInit {
     this.movieService.getMovies().subscribe(
       (response: any) => {
       console.log(response)
+      console.log("Movies")
       }
     )
+    // this.movieService.getPopularMovies().subscribe((data:any)=>{
+    //   this.similarMovies=data.results;
+    // });
 
   }
 

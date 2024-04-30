@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MovieserviceService {
-  private apiKey = '50f3bba3274791adf6d76141851adb37';
+  private apiKey = '7a4c1a70f94352c41f7fa71c363a37e8';
   constructor(private http: HttpClient){}
 
   login(username: string, password: string): Observable<any> {
@@ -16,6 +16,11 @@ export class MovieserviceService {
 
   getPopularMovies(): Observable<any> {
     let url = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}`;
+    return this.http.get(url);
+  }
+
+  getMovies(): Observable<any> {
+    let url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${this.apiKey}`;
     return this.http.get(url);
   }
 

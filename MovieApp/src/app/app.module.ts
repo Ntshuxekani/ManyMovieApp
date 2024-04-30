@@ -7,6 +7,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { MoviePageComponent } from './moviepage/moviepage.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,14 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    MoviePageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

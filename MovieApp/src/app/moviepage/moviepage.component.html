@@ -1,0 +1,36 @@
+<div class="container">
+       <!-- Toggle switch for showing the entire cast -->
+       <div class="form-check">
+           <input class="form-check-input" type="checkbox" id="showEntireCast" [(ngModel)]="showEntireCast">
+           <label class="form-check-label" for="showEntireCast">Show Entire Cast</label>
+       </div>
+   
+       <!-- Gallery for movie pictures -->
+       <div class="row mt-4">
+           <div class="col-md-4 mb-3" *ngFor="let picture of moviePictures">
+               <img src="{{ picture }}" class="img-fluid" alt="Movie Picture">
+           </div>
+       </div>
+   
+       <!-- Similar movies recommendations container -->
+       <div class="mt-4">
+           <h3>Similar Movies Recommendations</h3>
+           <div class="row">
+               <div class="col-md-3 mb-3" *ngFor="let similarMovie of similarMovies">
+                   <div class="card">
+                       <img src="{{ similarMovie.poster }}" class="card-img-top" alt="Similar Movie Poster">
+                       <div class="card-body">
+                           <h5 class="card-title">{{ similarMovie.title }}</h5>
+                           <p class="card-text">{{ similarMovie.description }}</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   
+       <!-- Movie name search field -->
+       <div class="mt-4">
+           <input type="text" class="form-control" placeholder="Search Movie" [(ngModel)]="searchTerm">
+       </div>
+   </div>
+   

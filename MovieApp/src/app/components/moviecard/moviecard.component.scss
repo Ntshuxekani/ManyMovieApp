@@ -17,9 +17,12 @@
     transition: transform 0.5s;
     transform-style: preserve-3d;
   }
-  
+  .movie-card:hover{
+    z-index: 1;
+  }
   .movie-card:hover .movie-card-inner {
     transform: rotateY(180deg);
+    
   }
   
   .movie-card-front,

@@ -22,7 +22,7 @@
     margin-right: 10px;
     width: 200px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 2em / 5em;
   }
   
   .search button {
@@ -60,12 +60,12 @@
   .search button,
   .register-btn,
   .login-btn {
-    background-color: #555; /* Use a shade of grey for buttons */
+    background-color: #555; 
   }
   
   /* Add more specific styles for buttons on hover */
   .search button:hover,
   .register-btn:hover,
   .login-btn:hover {
-    background-color: #777; /* Darker shade of grey on hover */
+    background-color: #777; 
   }

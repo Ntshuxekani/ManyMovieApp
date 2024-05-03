@@ -11,7 +11,7 @@
     Welcome back, {{ userEmail }}! <button (click)="logout()">Logout</button>
   </span>
   <span *ngIf="!isLoggedIn">
-    Do not have an account? <a routerLink="/register">Register</a>
+    <button routerLink="/register" class="login-btn">Register</button>
     <button routerLink="/login" class="login-btn">LOGIN</button>
   </span>
 </div>

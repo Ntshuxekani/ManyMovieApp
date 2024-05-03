@@ -1,0 +1,22 @@
+<div *ngIf="movieDetails">
+  <h2>{{ movieDetails.title }}</h2>
+  <div class="col-md-6">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movieDetails.poster_path" alt="{{ movieDetails.title }} poster">
+    <p>{{ movieDetails.overview }}</p>
+    <p>Release Date: {{ movieDetails.release_date }}</p>
+    <p>Rating: {{ movieDetails.vote_average }}</p>
+  </div>
+  
+  <h3>Similar Movies</h3>
+  <div class="similar-movies">
+    <div *ngFor="let movie of similarMovies" class="movie-card">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }} poster">
+      <p>{{ movie.title }}</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+

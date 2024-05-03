@@ -3,6 +3,7 @@ import { MovieService } from 'src/app/services/movieservice/movie-service.servic
 import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 import { MovieCommunicationService } from 'src/app/services/MovieComservice/moviecomservice.service';
 import { AuthService } from 'src/app/services/AuthService/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-moviecard',
@@ -18,30 +19,31 @@ export class MovieCardComponent implements OnInit {
     private movieService: MovieService,
     private watchlistService: WatchlistService,
     private movieCommunicationService: MovieCommunicationService,
-    private authService: AuthService 
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.movieService.getPopularMovies().subscribe((data:any)=>{
-      this.movies=data.results;
+    this.movieService.getPopularMovies().subscribe((data: any) => {
+      this.movies = data.results;
     });
-  
+
     if (this.authService.getIsLoggedIn()) {
       this.userEmail = this.authService.getLoggedInUserEmail();
     }
-  
+
     // Subscribe to changes in the search query
     this.movieCommunicationService.searchQuery$.subscribe(query => {
       if (query.trim() !== '') {
         this.getMovies(query);
       } else {
-        this.movieService.getPopularMovies().subscribe((data:any)=>{
-          this.movies=data.results;
+        this.movieService.getPopularMovies().subscribe((data: any) => {
+          this.movies = data.results;
         });
       }
     });
   }
-  
+
   getMovies(searchQuery: string): void {
     this.movieService.searchMovies(searchQuery).subscribe((data: any) => {
       this.movies = data.results;
@@ -74,5 +76,12 @@ export class MovieCardComponent implements OnInit {
       return this.watchlistService.getWatchlist(this.userEmail);
     }
     return [];
+  }
+
+  viewMovieDetails(movieId: string): void {
+    // this.router.navigate(['details', movieId]);
+    console.log("movie id :" +movieId)
+    this.router.navigate(["/details",movieId]); // Navigate to the desired page after login
+
   }
 }

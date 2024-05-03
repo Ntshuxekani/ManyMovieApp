@@ -7,13 +7,6 @@ export class WatchlistService {
   private watchlists: { [email: string]: string[] } = {};
 
   constructor() { }
-
-  // getWatchlist(email: string): string[] {
-  //   if (!this.watchlists[email]) {
-  //     this.watchlists[email] = [];
-  //   }
-  //   return this.watchlists[email];
-  // }
   getWatchlist(email: string): string[] {
     if (!this.watchlists[email]) {
       this.watchlists[email] = [];

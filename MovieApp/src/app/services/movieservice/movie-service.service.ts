@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiKey = '50f3bba3274791adf6d76141851adb37'; 
+  private apiKey = '50f3bba3274791adf6d76141851adb37';
   private baseUrl = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient) { }
@@ -25,4 +25,11 @@ export class MovieService {
     const url = `${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`;
     return this.http.get(url);
   }
+
+  
+  getSimilarMovies(id: string): Observable<any> {
+    const url = `${this.baseUrl}/movie/${id}/similar?api_key=${this.apiKey}`;
+    return this.http.get(url);
+  }
+  
 }

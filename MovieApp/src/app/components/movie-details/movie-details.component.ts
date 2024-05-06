@@ -7,18 +7,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss'],
-  animations: [
-    trigger('slide', [
-      transition(':increment', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('500ms', style({ transform: 'translateX(0)' })),
-      ]),
-      transition(':decrement', [
-        style({ transform: 'translateX(100%)' }),
-        animate('500ms', style({ transform: 'translateX(0)' })),
-      ]),
-    ]),
-  ],
 })
 export class MovieDetailsComponent implements OnInit {
   movieDetails: any;

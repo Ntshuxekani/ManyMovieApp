@@ -54,7 +54,7 @@ email: any;
           alert("Registration Successfull");
          
           this.registerForm.reset();
-          this.router.navigate(['landing-page']);// redirect to login page after signup
+          this.router.navigate(['home']);// redirect to login page after signup
         },err=>{console.log("something is wrong");})
       });
       

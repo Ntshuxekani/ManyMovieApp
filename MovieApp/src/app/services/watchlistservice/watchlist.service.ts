@@ -14,7 +14,6 @@ export class WatchlistService {
     return this.watchlists[email];
   }
   
-
   addToWatchlist(email: string, imdbID: string): void {
     if (!this.watchlists[email]) {
       this.watchlists[email] = [];

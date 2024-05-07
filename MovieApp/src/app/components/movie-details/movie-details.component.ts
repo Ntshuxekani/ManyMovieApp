@@ -29,11 +29,7 @@ export class MovieDetailsComponent implements OnInit {
       this.movieService.getSimilarMovies(movieId).subscribe((data: any) => {
         this.similarMovies = data.results;
       });
-      
     }
-    
   }
-
-
 }
 

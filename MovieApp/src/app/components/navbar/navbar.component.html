@@ -8,10 +8,10 @@
   </div> 
   <span *ngIf="isLoggedIn">
     <button routerLink="/watchlist">My Watchlist</button> 
-    Welcome back, {{ userEmail }}! <button (click)="logout()">Logout</button>
+    Welcome, {{ userEmail }}! <button (click)="logout()">Logout</button>
   </span>
   <span *ngIf="!isLoggedIn">
     <button routerLink="/register" class="login-btn">Register</button>
-    <button routerLink="/login" class="login-btn">LOGIN</button>
+    <button routerLink="/login" class="login-btn">Login</button>
   </span>
 </div>

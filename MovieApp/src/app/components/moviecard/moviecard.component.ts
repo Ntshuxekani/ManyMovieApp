@@ -79,8 +79,6 @@ export class MovieCardComponent implements OnInit {
   }
 
   viewMovieDetails(movieId: string): void {
-    // this.router.navigate(['details', movieId]);
-    console.log("movie id :" +movieId)
     this.router.navigate(["/details",movieId]); // Navigate to the desired page after login
 
   }

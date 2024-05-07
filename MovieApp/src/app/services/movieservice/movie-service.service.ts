@@ -26,7 +26,6 @@ export class MovieService {
     return this.http.get(url);
   }
 
-  
   getSimilarMovies(id: string): Observable<any> {
     const url = `${this.baseUrl}/movie/${id}/similar?api_key=${this.apiKey}`;
     return this.http.get(url);

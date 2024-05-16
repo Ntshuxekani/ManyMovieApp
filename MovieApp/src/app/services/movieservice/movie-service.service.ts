@@ -19,10 +19,13 @@ export class MovieService {
   getPopularMovies(): Observable<any> {
     const url = `${this.baseUrl}/movie/popular?api_key=${this.apiKey}`;
     return this.http.get(url);
+   // https://api.themoviedb.org/3/movie/popular?api_key=50f3bba3274791adf6d76141851adb37
+
   }
 
   getMovieDetails(id: string): Observable<any> {
     const url = `${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`;
     return this.http.get(url);
+    //https://api.themoviedb.org/3/movie/967847?api_key=50f3bba3274791adf6d76141851adb37
   }
 }

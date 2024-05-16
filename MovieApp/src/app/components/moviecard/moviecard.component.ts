@@ -49,11 +49,12 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToWatchlist(imdbID: string): void {
-    if (this.userEmail) {
+    // if () {
+      
       this.watchlistService.addToWatchlist(this.userEmail, imdbID);
-    } else {
-      alert('Please log in to add movies to your watchlist.');
-    }
+    // } else {
+      // alert('Please log in to add movies to your watchlist.');
+    // }
   }
 
   removeFromWatchlist(imdbID: string): void {

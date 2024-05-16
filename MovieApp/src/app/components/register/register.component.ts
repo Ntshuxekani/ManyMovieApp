@@ -23,7 +23,7 @@ email: any;
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
     // if(this.registerForm.get('email')?.touched)
     // {
@@ -31,7 +31,7 @@ email: any;
     // }
   }
   passwordsMatch() {
-    return this.registerForm.get('passwordConfirm')?.value != this.registerForm.get('password')?.value && this.registerForm.get('password')?.touched;
+    return this.registerForm.get('confirmPassword')?.value != this.registerForm.get('password')?.value && this.registerForm.get('password')?.touched;
   }
  
    numUsers=0;
@@ -49,7 +49,7 @@ email: any;
         console.log("after the get-inside",newUser);
 
 
-        this.http.post<any>("http://localhost:3000/signupUsersList",newUser)
+        this.http.post<any>("http://localhost:8080/api/v1/users",newUser)
         .subscribe(res=>{
           alert("Registration Successfull");
          

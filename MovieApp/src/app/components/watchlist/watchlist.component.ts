@@ -38,4 +38,5 @@ export class WatchlistComponent implements OnInit {
     this.movies = this.movies.filter(movie => movie.id !== imdbID);
   }
 
+  
 }

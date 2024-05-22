@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class WatchlistService {
   private watchlists: { [email: string]: string[] } = {};
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
   getWatchlist(email: string): string[] {
     if (!this.watchlists[email]) {
       this.watchlists[email] = [];
@@ -14,12 +15,21 @@ export class WatchlistService {
     return this.watchlists[email];
   }
   
-  addToWatchlist(email: string, imdbID: string): void {
+  addToWatchlist(email: string, imdbID: any): void {
     if (!this.watchlists[email]) {
       this.watchlists[email] = [];
     }
     if (!this.watchlists[email].includes(imdbID)) {
-      this.watchlists[email].push(imdbID);
+      console.log(imdbID.id,imdbID.original_title);
+      const movieId=imdbID.id;
+     const movieTitle=imdbID.original_title;
+      const movieDesc=imdbID.overview;
+      const movieRating=imdbID.vote_average
+      const img=imdbID.poster_path;
+      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img}).subscribe(response=>{console.log("movies added:",response);}, error=>{console.log("error",error);});
+    }else{
+      alert('movie added already');
+
     }
   }
 

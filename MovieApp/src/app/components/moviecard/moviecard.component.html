@@ -11,7 +11,7 @@
         <p>{{ movie.overview }}</p>
         <p>IMDB Rating: {{ movie.vote_average }}</p>
         <button (click)="viewMovieDetails(movie.id)">View Details</button>
-        <button *ngIf="!isInWatchlist(movie.id)" (click)="addToWatchlist(movie.id)">Add to Watchlist</button>
+        <button *ngIf="!isInWatchlist(movie.id)" (click)="addToWatchlist(movie)">Add to Watchlist</button>
         <button *ngIf="isInWatchlist(movie.id)" (click)="removeFromWatchlist(movie.id)">Remove from Watchlist</button>
       </div>
     </div>

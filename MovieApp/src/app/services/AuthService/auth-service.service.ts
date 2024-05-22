@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private token: any;
+  private token: string |null=null;
   private authStatusListener = new BehaviorSubject<boolean>(false);
 
   private isLoggedIn: boolean = false;
@@ -17,21 +17,25 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
-  login(email: string): void {
-    this.isLoggedIn = true;
-    this.loggedInUserEmail = email;
-    localStorage.setItem('loggedInUserEmail', email);
-    this.authChanged.next(true); // Notify subscribers that authentication state has changed
-  }
+  // login(email: string): void {
+  //   this.isLoggedIn = true;
+  //   this.loggedInUserEmail = email;
+  //   localStorage.setItem('loggedInUserEmail', email);
+  //   this.authChanged.next(true); // Notify subscribers that authentication state has changed
+  // }
   signin(email: string,password:string){
-    this.http.post<{ token: string }>('http://localhost:8080/api/login', { email, password })
+    this.http.post<{ token: string }>('http://localhost:8080/api/v1/auth/login', { email, password })
       .subscribe(response => {
         const token = response.token;
         if (token) {
           this.token = token;
-          this.authStatusListener.next(true);
+          // this.authStatusListener.next(true);
           localStorage.setItem('token', token);
+          this.loggedInUserEmail = email;
+          localStorage.setItem('loggedInUserEmail', email);
           this.router.navigate(['/home']);
+          
+
         }
       });
   }
@@ -46,11 +50,11 @@ export class AuthService {
     this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
   }
 
-  getToken() {
-    return localStorage.getItem('token')
+  getToken(): string | null {
+    return this.token;
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !!this.token;
   }
 
@@ -68,8 +72,9 @@ export class AuthService {
 
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
-    if (userEmail) {
-      this.login(userEmail);
+    const token = localStorage.getItem('token')
+    if (userEmail && token) {
+      this.signin(userEmail,token);
     }
   }
 }

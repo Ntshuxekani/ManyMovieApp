@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         });
         if (user) {
           alert('Login Successful');
-          this.authService.login(this.loginForm.value.email); // Update user's authentication state
+          this.authService.signin(this.loginForm.value.email,this.loginForm.value.password); // Update user's authentication state
          
           this.loginForm.reset();
           this.router.navigate(["home"]); // Navigate to the desired page after login

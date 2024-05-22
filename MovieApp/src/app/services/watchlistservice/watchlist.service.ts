@@ -30,6 +30,7 @@ export class WatchlistService {
     }else{
       alert('movie added already');
       
+
     }
   }
 

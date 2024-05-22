@@ -1,15 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private token: any;
+  private authStatusListener = new BehaviorSubject<boolean>(false);
+
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
-  authChanged = new Subject<boolean>(); // Subject for notifying authentication state changes
+  authChanged = new Subject<boolean>();
+   // Subject for notifying authentication state changes
 
-  constructor() { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   login(email: string): void {
     this.isLoggedIn = true;
@@ -17,12 +23,39 @@ export class AuthService {
     localStorage.setItem('loggedInUserEmail', email);
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
+  signin(email: string,password:string){
+    this.http.post<{ token: string }>('http://localhost:8080/api/login', { email, password })
+      .subscribe(response => {
+        const token = response.token;
+        if (token) {
+          this.token = token;
+          this.authStatusListener.next(true);
+          localStorage.setItem('token', token);
+          this.router.navigate(['/home']);
+        }
+      });
+  }
 
   logout(): void {
     this.isLoggedIn = false;
+    this.token = null;
     this.loggedInUserEmail = '';
     localStorage.removeItem('loggedInUserEmail');
-    this.authChanged.next(false); // Notify subscribers that authentication state has changed
+    localStorage.removeItem('token');
+    this.authChanged.next(false);
+    this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  isAuthenticated() {
+    return !!this.token;
+  }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
   }
 
   getIsLoggedIn(): boolean {

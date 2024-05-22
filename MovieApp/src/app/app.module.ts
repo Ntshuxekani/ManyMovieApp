@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { MovieService } from './services/movieservice/movie-service.service';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
@@ -15,6 +15,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { AuthService } from './services/AuthService/auth-service.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent }
@@ -43,7 +45,12 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [
-    MovieService
+    MovieService,
+    AuthService,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

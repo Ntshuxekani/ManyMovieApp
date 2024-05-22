@@ -15,14 +15,14 @@ email: any;
   constructor(private formBuilder:FormBuilder, private http: HttpClient,private router:Router){}
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      firstname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
   passwordsMatch() {
-    return this.registerForm.get('passwordConfirm')?.value != this.registerForm.get('password')?.value && this.registerForm.get('password')?.touched;
+    return this.registerForm.get('confirmPassword')?.value != this.registerForm.get('password')?.value && this.registerForm.get('password')?.touched;
   }
  
    numUsers=0;
@@ -34,7 +34,7 @@ email: any;
         let newUser=this.registerForm.value;
         newUser["id"]=this.numUsers+1;
 
-        this.http.post<any>("http://localhost:3000/signupUsersList",newUser)
+        this.http.post<any>("http://localhost:8080/api/v1/auth/register",newUser)
         .subscribe(res=>{
           alert("Registration Successfull");
          

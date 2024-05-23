@@ -26,7 +26,7 @@ export class WatchlistService {
       const movieDesc=imdbID.overview;
       const movieRating=imdbID.vote_average
       const img=imdbID.poster_path;
-      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img}).subscribe(response=>{console.log("movies added:",response);}, error=>{console.log("error",error);});
+      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img}).subscribe(response=>{console.log("movies added successfully");}, error=>{console.log("error",error);});
     }else{
       alert('movie added already');
       

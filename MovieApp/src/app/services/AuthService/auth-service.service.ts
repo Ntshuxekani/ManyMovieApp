@@ -17,11 +17,13 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
-  login(email: string): void {
+  login(email: string, token: string): void {
     this.isLoggedIn = true;
-  
+    this.token = token;
+    console.log('Login service the' + token)
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
+    localStorage
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
 //   signin(email: string,password:string){
@@ -54,6 +56,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
+    console.log(this.token)
     return this.token;
   }
 
@@ -73,12 +76,23 @@ export class AuthService {
     return this.loggedInUserEmail;
   }
 
+  // initAuth(): void {
+  //   const userEmail = localStorage.getItem('loggedInUserEmail');
+  //   const token = localStorage.getItem('token')
+  //   if (userEmail && token) {
+  //     this.login(userEmail, token);
+  //     this.token=token;
+  //     console.log('Login service this' + token)
+  //   }
+  // }
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
-    const token = localStorage.getItem('token')
-    if (userEmail) {
-      this.login(userEmail);
-      this.token=token;
+    const token = localStorage.getItem('token');
+    if (userEmail && token) {
+      this.login(userEmail, token);
+      console.log('Token initialized:', token);
+    } else {
+      console.log('No token found in local storage.');
     }
   }
 }

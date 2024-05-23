@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   email: string | any;
   password: string | any;
   private token: string |null=null;
+  isLoggedIn: boolean = false;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -26,6 +27,17 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Proceed as if the user is logged in
+      this.router.navigate(['/home']);
+      // Optionally, you can also authenticate the user in your authService
+      this.authService.login(this.email, token); // Assuming this method handles authentication
+    } else {
+      // Redirect the user to the login page
+      this.router.navigate(['/login']);
+    }
   }
   // onLogin() {
   //   if(this.loginForm.valid){
@@ -38,10 +50,13 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         const token = res.token;
         if (token) {
+          console.log(token)
         this.token = token;
         localStorage.setItem('token', token);
+        this.isLoggedIn = true;
+        localStorage.getItem('token')
         this.router.navigate(['/home']);
-        this.authService.login(this.loginForm.value.email);
+        this.authService.login(this.loginForm.value.email, token);
       }
       //   const user = res.find((a: any) => {
       //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password

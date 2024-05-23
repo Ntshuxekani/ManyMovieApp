@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,8 +10,15 @@ import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { MovieService } from './services/movieservice/movie-service.service';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
+//import { ReviewMovieComponent } from './components/review-movie/review-movie.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+// import { PageComponent } from './page/page.component';
+// import { ProfilepageComponent } from './profilepage/profilepage.component';
+// import { UserprofileComponent } from './userprofile/userprofile.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent }
@@ -22,13 +27,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    AppComponent,
     LoginComponent,
     LandingPageComponent,
     RegisterComponent,
     MovieCardComponent,
     WatchlistComponent,
-    ReviewMovieComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,

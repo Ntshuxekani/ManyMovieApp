@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   email: string | any;
   password: string | any;
+  private token: string |null=null;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -26,26 +27,36 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
-  onLogin() {
-    this.authService.signin(this.email, this.password);
-  }
+  // onLogin() {
+  //   if(this.loginForm.valid){
+  //     const email=this.loginForm.value.email;
+  //     const password=this.loginForm.value.password;
+  //   this.authService.signin(this.email, this.password);
+  // }}
   login(): void {
-    this.http.get<any>("http://localhost:8080/api/login")
+    this.http.post<{ token: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
       .subscribe(res => {
-        const user = res.find((a: any) => {
-          return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-        });
-        if (user) {
-          alert('Login Successful');
-          this.authService.login(this.loginForm.value.email); // Update user's authentication state
+        const token = res.token;
+        if (token) {
+        this.token = token;
+        localStorage.setItem('token', token);
+        this.router.navigate(['/home']);
+        this.authService.login(this.loginForm.value.email);
+      }
+      //   const user = res.find((a: any) => {
+      //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+      //   });
+      //   if (user) {
+      //     alert('Login Successful');
+      //     this.authService.login(this.loginForm.value.email); // Update user's authentication state
          
-          this.loginForm.reset();
-          this.router.navigate(["home"]); // Navigate to the desired page after login
-        } else {
-          alert("User not found");
-        }
+      //     this.loginForm.reset();
+      //     this.router.navigate(["home"]); // Navigate to the desired page after login
+      //   } else {
+      //     alert("User not found");
+      //   }
       }, err => {
         alert("Something went wrong");
-      });
+       });
     }
   }

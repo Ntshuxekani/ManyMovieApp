@@ -7,12 +7,12 @@
       </div>
       <div class="movie-card-back">
         <h3>{{ movie.title }}</h3>
-        <p>{{ movie.release_date }}</p>
-        <p>{{ movie.overview }}</p>
-        <p>IMDB Rating: {{ movie.vote_average }}</p>
+        <p>Movie release date: {{ movie.release_date }}</p>
         <button (click)="viewMovieDetails(movie.id)">View Details</button>
         <button *ngIf="!isInWatchlist(movie.id)" (click)="addToWatchlist(movie)">Add to Watchlist</button>
         <button *ngIf="isInWatchlist(movie.id)" (click)="removeFromWatchlist(movie.id)">Remove from Watchlist</button>
+        <p style="margin-top: 10px;">IMDB Rating: {{ movie.vote_average }}</p>
+        <p class="">{{ movie.overview }}</p>
       </div>
     </div>
   </div>

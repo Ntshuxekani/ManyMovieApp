@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class AuthService {
   private token: string |null=null;
   private authStatusListener = new BehaviorSubject<boolean>(false);
+  
 
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
@@ -20,7 +21,6 @@ export class AuthService {
   login(email: string, token: string): void {
     this.isLoggedIn = true;
     this.token = token;
-    console.log('Login service the' + token)
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
     localStorage
@@ -56,7 +56,6 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    console.log(this.token)
     return this.token;
   }
 
@@ -90,7 +89,6 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (userEmail && token) {
       this.login(userEmail, token);
-      console.log('Token initialized:', token);
     } else {
       console.log('No token found in local storage.');
     }

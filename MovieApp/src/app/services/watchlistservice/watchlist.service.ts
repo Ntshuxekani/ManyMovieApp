@@ -33,15 +33,18 @@ export class WatchlistService {
 
     }
   }
-
+// Removie the movie
   removeFromWatchlist(email: string, imdbID: any): void {
     if (!this.watchlists[email]) {
       return;
+    }else
+    {
+      
     }
-    this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID);
-  }
+    this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID); //remove the specific movie and modify the array.
+  } 
 
   isInWatchlist(email: string, imdbID: any): boolean {
-    return this.watchlists[email] && this.watchlists[email].includes(imdbID);
+    return this.watchlists[email] && this.watchlists[email].includes(imdbID); 
   }
 }

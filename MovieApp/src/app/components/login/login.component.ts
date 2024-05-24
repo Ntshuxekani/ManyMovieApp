@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/AuthService/auth-service.service';
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string | any;
   private token: string |null=null;
   isLoggedIn: boolean = false;
+  private tokenExpirationTimer: any;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -50,8 +52,8 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         const token = res.token;
         if (token) {
-          console.log(token)
         this.token = token;
+        this.startTokenExpirationTimer();
         localStorage.setItem('token', token);
         this.isLoggedIn = true;
         localStorage.getItem('token')
@@ -73,5 +75,16 @@ export class LoginComponent implements OnInit {
       }, err => {
         alert("Something went wrong");
        });
+       
+    }
+    private startTokenExpirationTimer(): void {
+      const tokenExpirationTime = 30 * 1000; // 30 seconds
+      this.tokenExpirationTimer = timer(tokenExpirationTime).subscribe(() => {
+        this.token = null;
+        localStorage.removeItem('token');
+        // Display modal or perform other actions here
+        alert("Login session has expired...")
+        this.authService.logout();
+      });
     }
   }

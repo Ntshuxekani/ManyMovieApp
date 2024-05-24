@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   email: string | any;
   password: string | any;
+  private token: string |null=null;
+  isLoggedIn: boolean = false;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -25,33 +27,51 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-  }
-  onLogin() {
-    if(this.loginForm.valid){
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
-      this.authService.signin(this.email, this.password);
 
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Proceed as if the user is logged in
+      this.router.navigate(['/home']);
+      // Optionally, you can also authenticate the user in your authService
+      this.authService.login(this.email, token); // Assuming this method handles authentication
+    } else {
+      // Redirect the user to the login page
+      this.router.navigate(['/login']);
     }
-   
   }
-  // login(): void {
-  //   this.http.get<any>("http://localhost:8080/api/login")
-  //     .subscribe(res => {
-  //       const user = res.find((a: any) => {
-  //         return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-  //       });
-  //       if (user) {
-  //         alert('Login Successful');
-  //         this.authService.signin(this.loginForm.value.email,this.loginForm.value.password); // Update user's authentication state
+  // onLogin() {
+  //   if(this.loginForm.valid){
+  //     const email=this.loginForm.value.email;
+  //     const password=this.loginForm.value.password;
+  //   this.authService.signin(this.email, this.password);
+  // }}
+  login(): void {
+    this.http.post<{ token: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
+      .subscribe(res => {
+        const token = res.token;
+        if (token) {
+          console.log(token)
+        this.token = token;
+        localStorage.setItem('token', token);
+        this.isLoggedIn = true;
+        localStorage.getItem('token')
+        this.router.navigate(['/home']);
+        this.authService.login(this.loginForm.value.email, token);
+      }
+      //   const user = res.find((a: any) => {
+      //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+      //   });
+      //   if (user) {
+      //     alert('Login Successful');
+      //     this.authService.login(this.loginForm.value.email); // Update user's authentication state
          
-  //         this.loginForm.reset();
-  //         this.router.navigate(["home"]); // Navigate to the desired page after login
-  //       } else {
-  //         alert("User not found");
-  //       }
-  //     }, err => {
-  //       alert("Something went wrong");
-  //     });
-  //   }
+      //     this.loginForm.reset();
+      //     this.router.navigate(["home"]); // Navigate to the desired page after login
+      //   } else {
+      //     alert("User not found");
+      //   }
+      }, err => {
+        alert("Something went wrong");
+       });
+    }
   }

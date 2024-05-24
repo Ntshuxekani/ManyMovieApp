@@ -17,28 +17,33 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
-  // login(email: string): void {
-  //   this.isLoggedIn = true;
-  //   this.loggedInUserEmail = email;
-  //   localStorage.setItem('loggedInUserEmail', email);
-  //   this.authChanged.next(true); // Notify subscribers that authentication state has changed
-  // }
-  signin(email: string,password:string){
-    this.http.post<{ token: string }>('http://localhost:8080/api/v1/auth/login', { email, password })
-      .subscribe(response => {
-        const token = response.token;
-        if (token) {
-          this.token = token;
-          // this.authStatusListener.next(true);
-          localStorage.setItem('token', token);
-          this.loggedInUserEmail = email;
-          localStorage.setItem('loggedInUserEmail', email);
-          this.router.navigate(['/home']);
+  login(email: string, token: string): void {
+    this.isLoggedIn = true;
+    this.token = token;
+    console.log('Login service the' + token)
+    this.loggedInUserEmail = email;
+    localStorage.setItem('loggedInUserEmail', email);
+    localStorage
+    this.authChanged.next(true); // Notify subscribers that authentication state has changed
+  }
+//   signin(email: string,password:string){
+//     this.http.post<{ token: string }>('http://localhost:8080/api/v1/auth/login',{
+//    "email":"Sm@gmail.com","password":"12345678"
+// })
+//       .subscribe(response => {
+//         const token = response.token;
+//         if (token) {
+//           this.token = token;
+//           // this.authStatusListener.next(true);
+//           localStorage.setItem('token', token);
+//           this.loggedInUserEmail = email;
+//           localStorage.setItem('loggedInUserEmail', email);
+//           this.router.navigate(['/landing-page']);
           
 
-        }
-      });
-  }
+//         }
+//       });
+//   }
 
   logout(): void {
     this.isLoggedIn = false;
@@ -51,6 +56,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
+    console.log(this.token)
     return this.token;
   }
 
@@ -70,11 +76,23 @@ export class AuthService {
     return this.loggedInUserEmail;
   }
 
+  // initAuth(): void {
+  //   const userEmail = localStorage.getItem('loggedInUserEmail');
+  //   const token = localStorage.getItem('token')
+  //   if (userEmail && token) {
+  //     this.login(userEmail, token);
+  //     this.token=token;
+  //     console.log('Login service this' + token)
+  //   }
+  // }
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     if (userEmail && token) {
-      this.signin(userEmail,token);
+      this.login(userEmail, token);
+      console.log('Token initialized:', token);
+    } else {
+      console.log('No token found in local storage.');
     }
   }
 }

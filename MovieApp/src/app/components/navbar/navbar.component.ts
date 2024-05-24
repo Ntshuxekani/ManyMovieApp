@@ -12,18 +12,24 @@ export class NavbarComponent implements OnInit {
  isLoggedIn: boolean = false;
  userEmail: string = '';
  searchQuery: string = '';
+ token: string | null = null; // Initialize token variable
 
  constructor(private authService: AuthService,private movieCommunicationService: MovieCommunicationService , private router: Router) { }
 
  ngOnInit(): void {
-   this.authService.authChanged.subscribe((isLoggedIn: boolean) => {
-     this.isLoggedIn = isLoggedIn;
-     if (this.isLoggedIn) {
-       this.userEmail = this.authService.getLoggedInUserEmail();
-     } else {
-       this.userEmail = '';
-     }
-   });
+
+  this.authService.initAuth(); // Initialize authentication in ngOnInit
+   
+  this.authService.authChanged.subscribe((isLoggedIn: boolean) => {
+    this.isLoggedIn = isLoggedIn;
+    if (this.isLoggedIn) {
+      this.userEmail = this.authService.getLoggedInUserEmail();
+      this.token = this.authService.getToken(); // Update token when authentication changes
+    } else {
+      this.userEmail = '';
+      this.token = null;
+    }
+  });
 
    this.isLoggedIn = this.authService.getIsLoggedIn();
    if (this.isLoggedIn) {

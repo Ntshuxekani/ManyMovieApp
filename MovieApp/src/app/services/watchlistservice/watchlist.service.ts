@@ -26,21 +26,22 @@ export class WatchlistService {
       const movieDesc=imdbID.overview;
       const movieRating=imdbID.vote_average
       const img=imdbID.poster_path;
-      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img}).subscribe(response=>{console.log("movies added:",response);}, error=>{console.log("error",error);});
+      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img}).subscribe(response=>{console.log("movies added successfully");}, error=>{console.log("error",error);});
     }else{
       alert('movie added already');
+      
 
     }
   }
 
-  removeFromWatchlist(email: string, imdbID: string): void {
+  removeFromWatchlist(email: string, imdbID: any): void {
     if (!this.watchlists[email]) {
       return;
     }
     this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID);
   }
 
-  isInWatchlist(email: string, imdbID: string): boolean {
+  isInWatchlist(email: string, imdbID: any): boolean {
     return this.watchlists[email] && this.watchlists[email].includes(imdbID);
   }
 }

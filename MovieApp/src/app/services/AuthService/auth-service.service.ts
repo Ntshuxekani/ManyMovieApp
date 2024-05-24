@@ -14,6 +14,7 @@ export class AuthService {
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
   authChanged = new Subject<boolean>();
+  private user_id?: string;
    // Subject for notifying authentication state changes
 
   constructor(private http:HttpClient, private router:Router) { }
@@ -46,6 +47,7 @@ export class AuthService {
 //   }
 
   logout(): void {
+    this.user_id='';
     this.isLoggedIn = false;
     this.token = null;
     this.loggedInUserEmail = '';
@@ -73,6 +75,9 @@ export class AuthService {
 
   getLoggedInUserEmail(): string {
     return this.loggedInUserEmail;
+  }
+  getUserId(){
+    return this.user_id
   }
 
   // initAuth(): void {

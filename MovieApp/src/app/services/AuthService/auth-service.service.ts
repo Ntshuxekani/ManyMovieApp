@@ -9,52 +9,45 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class AuthService {
   private token: string |null=null;
   private authStatusListener = new BehaviorSubject<boolean>(false);
-  
-
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
   authChanged = new Subject<boolean>();
-  private user_id?: string;
-   // Subject for notifying authentication state changes
-
+  private userId:string | null=null;
+  
   constructor(private http:HttpClient, private router:Router) { }
 
-  login(email: string, token: string): void {
+  login(email: string, password: string): void {
+    this.http.post<{ token: string, userId: string }>('http://localhost:8080/api/v1/auth/login', { email, password })
+    .subscribe(res => {
+      const { token, userId } = res;
+      if (token && userId) {
     this.isLoggedIn = true;
     this.token = token;
     this.loggedInUserEmail = email;
+    this.userId = userId;
+    localStorage.setItem('token', token);
     localStorage.setItem('loggedInUserEmail', email);
-    localStorage
-    this.authChanged.next(true); // Notify subscribers that authentication state has changed
-  }
-//   signin(email: string,password:string){
-//     this.http.post<{ token: string }>('http://localhost:8080/api/v1/auth/login',{
-//    "email":"Sm@gmail.com","password":"12345678"
-// })
-//       .subscribe(response => {
-//         const token = response.token;
-//         if (token) {
-//           this.token = token;
-//           // this.authStatusListener.next(true);
-//           localStorage.setItem('token', token);
-//           this.loggedInUserEmail = email;
-//           localStorage.setItem('loggedInUserEmail', email);
-//           this.router.navigate(['/landing-page']);
-          
-
-//         }
-//       });
-//   }
+    localStorage.setItem('userId', userId);
+    this.authStatusListener.next(true);
+    this.authChanged.next(true);
+    this.router.navigate(['/home']);
+      }
+    },err => {
+      alert('Something went wrong');
+    });
+}
 
   logout(): void {
-    this.user_id='';
+    this.userId=null;
     this.isLoggedIn = false;
     this.token = null;
     this.loggedInUserEmail = '';
     localStorage.removeItem('loggedInUserEmail');
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.authStatusListener.next(false);
     this.authChanged.next(false);
-    this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
+    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
@@ -76,26 +69,22 @@ export class AuthService {
   getLoggedInUserEmail(): string {
     return this.loggedInUserEmail;
   }
-  getUserId(){
-    return this.user_id
+  getUserId():string|null{
+    return this.userId
   }
 
-  // initAuth(): void {
-  //   const userEmail = localStorage.getItem('loggedInUserEmail');
-  //   const token = localStorage.getItem('token')
-  //   if (userEmail && token) {
-  //     this.login(userEmail, token);
-  //     this.token=token;
-  //     console.log('Login service this' + token)
-  //   }
-  // }
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
     const token = localStorage.getItem('token');
-    if (userEmail && token) {
-      this.login(userEmail, token);
+    const userId = localStorage.getItem('userId');
+    if (userEmail && token && userId) {
+      this.token = token;
+      this.isLoggedIn = true;
+      this.loggedInUserEmail = userEmail;
+      this.userId = userId;
+      this.authStatusListener.next(true);
     } else {
-      console.log('No token found in local storage.');
+      this.logout();
     }
   }
 }

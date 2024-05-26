@@ -11,16 +11,9 @@ import { timer } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  email: string | any;
-  password: string | any;
-  private token: string |null=null;
-  private userId: string | null = null;
-  isLoggedIn: boolean = false;
-  private tokenExpirationTimer: any;
 
   constructor(
     private formbuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private authService: AuthService
   ) { }
@@ -31,39 +24,13 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Proceed as if the user is logged in
-      this.router.navigate(['/home']);
-      // Optionally, you can also authenticate the user in your authService
-      this.authService.login(this.email, token); // Assuming this method handles authentication
-    } else {
-      // Redirect the user to the login page
-      this.router.navigate(['/login']);
-    }
+   this.authService.initAuth();
   }
   
   login(): void {
-    this.http.post<{ token: string,userId: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
-      .subscribe(res => {
-        const token = res.token;
+    //const { email, password } = this.loginForm.value;
+       const email=this.loginForm.value;
+       const password=this.loginForm.value;
+        this.authService.login(email,password);
       
-        console.log(res)
-        // Store the user ID
-        console.log(this.userId); // Debugging purposes
-        console.log(this.authService.getUserId())
-        if (token) {
-        this.token = token;
-         localStorage.setItem('token', token);
-        this.isLoggedIn = true;
-        localStorage.getItem('token')
-        this.router.navigate(['/home']);
-        this.authService.login(this.loginForm.value.email, token);
-      }
-    
-      }, err => {
-        alert("Something went wrong");
-       });
-       
-    }
-  }
+  }}

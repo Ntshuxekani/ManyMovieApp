@@ -27,10 +27,7 @@ email: any;
  
    numUsers=0;
   register(){
-    // this.http.get('http://localhost:3000/signupUsersList').toPromise().then(
-    //   response=>{var numberOfUsers = response as any[];
-    //     this.numUsers=numberOfUsers.length;
-
+    if (this.registerForm.valid) {
         let newUser=this.registerForm.value;
         newUser["id"]=this.numUsers+1;
 
@@ -39,14 +36,13 @@ email: any;
           alert("Registration Successfull");
          
           this.registerForm.reset();
-          this.router.navigate(['home']);// redirect to login page after signup
+          this.router.navigate(['home']);
         },err=>{console.log("something is wrong");})
-      //});
       
     
   }
  
   }
-
+}
 
 

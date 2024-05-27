@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit {
  userEmail: string = '';
  searchQuery: string = '';
  token: string | null = null; // Initialize token variable
+//  isLoggedin = false;
+ onLoggedIn: boolean = false;
 
  constructor(private authService: AuthService,private movieCommunicationService: MovieCommunicationService , private router: Router) { }
 
@@ -29,7 +31,18 @@ export class NavbarComponent implements OnInit {
       this.userEmail = '';
       this.token = null;
     }
+
+    this.authService.getAuthStatusListener().subscribe((isLoggedIn: boolean) => {
+      this.onLoggedIn = isLoggedIn;
+      if (this.onLoggedIn) {
+        this.userEmail = this.authService.getLoggedInUserEmail();
+      } else {
+        this.userEmail = '';
+      }
+    });
+
   });
+  
 
    this.isLoggedIn = this.authService.getIsLoggedIn();
    if (this.isLoggedIn) {
@@ -49,4 +62,6 @@ export class NavbarComponent implements OnInit {
  navigateHome(): void {
    this.router.navigate(['/home']);
  }
+
+ 
 }

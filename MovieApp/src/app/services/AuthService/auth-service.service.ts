@@ -25,6 +25,7 @@ export class AuthService {
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
     this.isLoggedInSubject.next(true);
+    this.isLoggedInSubject.next(true);
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
 //   signin(email: string,password:string){
@@ -53,6 +54,7 @@ export class AuthService {
     localStorage.removeItem('loggedInUserEmail');
     localStorage.removeItem('token');
     this.authChanged.next(false);
+    this.isLoggedInSubject.next(false);
     this.isLoggedInSubject.next(false);
     this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
   }

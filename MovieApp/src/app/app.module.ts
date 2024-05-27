@@ -14,10 +14,10 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 // import { PageComponent } from './page/page.component';
 // import { ProfilepageComponent } from './profilepage/profilepage.component';
-// import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserprofileComponent } from './userprofile/userprofile.component';
+
+
 
 
 const routes: Routes = [
@@ -34,8 +34,7 @@ const routes: Routes = [
     MovieCardComponent,
     WatchlistComponent,
     NavbarComponent,
-    UserprofileComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

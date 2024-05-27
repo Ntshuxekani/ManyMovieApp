@@ -37,11 +37,11 @@ email: any;
    numUsers=0;
   register(){
    
-    console.log("validationTest: ",this.registerForm.get('email')?.errors);
-    this.http.get('http://localhost:3000/signupUsersList').toPromise().then(
-      response=>{var numberOfUsers = response as any[];
-        this.numUsers=numberOfUsers.length;
-        console.log("after get-inside",this.numUsers);
+    // console.log("validationTest: ",this.registerForm.get('email')?.errors);
+    // this.http.get('http://localhost:3000/signupUsersList').toPromise().then(
+    //   response=>{var numberOfUsers = response as any[];
+    //     this.numUsers=numberOfUsers.length;
+    //     console.log("after get-inside",this.numUsers);
 
         let newUser=this.registerForm.value;
         newUser["id"]=this.numUsers+1;
@@ -49,14 +49,14 @@ email: any;
         console.log("after the get-inside",newUser);
 
 
-        this.http.post<any>("http://localhost:8080/api/v1/users",newUser)
+        this.http.post<any>("http://localhost:8080/api/v1/register",newUser)
         .subscribe(res=>{
           alert("Registration Successfull");
          
           this.registerForm.reset();
           this.router.navigate(['landing-page']);// redirect to login page after signup
         },err=>{console.log("something is wrong");})
-      });
+     // });
       
     
   }

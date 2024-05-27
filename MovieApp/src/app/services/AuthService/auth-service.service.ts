@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class AuthService {
   private token: string |null=null;
   private authStatusListener = new BehaviorSubject<boolean>(false);
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   
 
   private isLoggedIn: boolean = false;
@@ -23,7 +24,7 @@ export class AuthService {
     this.token = token;
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
-    localStorage
+    this.isLoggedInSubject.next(true);
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
 //   signin(email: string,password:string){
@@ -52,6 +53,7 @@ export class AuthService {
     localStorage.removeItem('loggedInUserEmail');
     localStorage.removeItem('token');
     this.authChanged.next(false);
+    this.isLoggedInSubject.next(false);
     this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
   }
 

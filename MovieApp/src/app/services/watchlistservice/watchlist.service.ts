@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class WatchlistService {
   private watchlists: { [email: string]: string[] } = {};
+  userId: number | null = null;
+
 
   constructor(private http:HttpClient) { }
   getWatchlist(email: string): string[] {
@@ -16,6 +18,12 @@ export class WatchlistService {
   } 
   
   addToWatchlist(email: string, imdbID: any): void {
+    const userId = this.userId;
+    if (!userId) {
+      console.error('User ID is missing.');
+      return;
+    }
+
     console.log(email)
     if (!this.watchlists[email]) {
   
@@ -28,7 +36,7 @@ export class WatchlistService {
       const movieDesc=imdbID.overview;
       const movieRating=imdbID.vote_average
       const img=imdbID.poster_path;
-      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img,user_email:email}).subscribe(response=>{console.log("movies added successfully");}, error=>{console.log("error",error);});
+      this.http.post('http://localhost:8080/api/v1/auth/movie',{id:movieId,title:movieTitle,description:movieDesc,rating:movieRating,image:img,user_email:email,user_id:userId}).subscribe(response=>{console.log("movies added successfully");}, error=>{console.log("error",error);});
     }else{
       alert('movie added already');
       

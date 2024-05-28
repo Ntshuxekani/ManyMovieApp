@@ -27,29 +27,31 @@ export class WatchlistComponent implements OnInit {
       this.movies = data;
     });
   }
-  
 
-  // getMoviesDetails(): void {
-  //   this.watchlist.forEach(id => {
-  //     this.movieService.getMovieDetails(id).subscribe((data: any) => {
-  //       this.movies.push(data);
-  //     });
-  //   });
-  // }
+  removeFromWatchlist(movieId: any): void {
+    this.watchlistService.deleteMovie(movieId).subscribe(
+      () => {
+        console.log('Movie removed successfully');
+        window.location.reload();
+        // Optionally, update the UI to reflect the deletion
+      },
+      error => {
+        console.error('Error removing movie', error);
+      }
+    );
 
 
-  removeFromWatchlist(imdbID: any): void {
-    const userEmail = this.authService.getLoggedInUserEmail();
-    const userId = this.authService.getUserId(); // Assuming you have this method
-    this.watchlistService.deleteMoviesByUserId(userId).subscribe((data: any[]) => {
-      this.movies = data;
-      this.movies = this.movies.filter(movie => movie.id !== imdbID);
+  //   const userEmail = this.authService.getLoggedInUserEmail();
+  //   const userId = this.authService.getUserId(); // Assuming you have this method
+  //   this.watchlistService.deleteMovie().subscribe((data: any[]) => {
+  //     this.movies = data;
+  //     //this.movies = this.movies.filter(movie => movie.id !== imdbID);
 
      
-    });
+  //   });
 
-  //   this.watchlistService.removeFromWatchlist(userEmail, imdbID);
-  //   this.movies = this.movies.filter(movie => movie.id !== imdbID);
-  }
+  // //   this.watchlistService.removeFromWatchlist(userEmail, imdbID);
+  // //   this.movies = this.movies.filter(movie => movie.id !== imdbID);
+  // }
 
-}
+}}

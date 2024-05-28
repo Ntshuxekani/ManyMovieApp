@@ -1,5 +1,5 @@
+<div class="container" style="padding-top: 90px;">
 <div class="watchlist row">
-  <h2>My Watchlist</h2>
   <div *ngFor="let movie of movies" class="movie-card col-md-4" style="top: 20px;">
     <div class="movie-card-inner">
       <div class="movie-card-front">
@@ -11,8 +11,13 @@
         <p>{{ movie.overview }}</p>
         <p>{{movie.poster_path}}</p>
         <p>IMDB Rating: {{ movie.vote_average }}</p>
-        <button (click)="removeFromWatchlist(movie)">Remove from Watchlist</button>
+        <button (click)="removeFromWatchlist(movie.id)">Remove from Watchlist</button>
       </div>
     </div>
   </div>
+</div>
+</div>
+
+<div *ngIf="movies.length === 0" class="emptyWatchlist">
+  <h1>Your Watchlist is empty</h1>
 </div>

@@ -22,8 +22,11 @@ export class WatchlistService {
   getMoviesByUserId(userId: number): Observable<any> {
     return this.http.get<any>(`${this.url}/user/${userId}`);
   }
-  deleteMoviesByUserId(userId: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}/user/${userId}`);
+  // deleteMoviesByUserId(userId: number): Observable<any> {
+  //   return this.http.delete<any>(`${this.url}/user/${userId}`);
+  // }
+  deleteMovie(movieId: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/movie/${movieId}`);
   }
  // /api/v1/auth/movie/user/{id}
 
@@ -74,14 +77,22 @@ export class WatchlistService {
   }
 // Removie the movie
   removeFromWatchlist(email: string, imdbID: any): void {
-    if (!this.watchlists[email]) {
-      return;
-    }else
-    {
+    
+    this.http.delete(`${this.url}/`).subscribe(response => {
+      console.log("Movie removed successfully");
+    }, error => {
+      console.log("Error removing movie", error);
+    });
+  
+  //   if (!this.watchlists[email]) {
+  //     return;
+  //   }else
+  //   {
       
-    }
-    this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID); //remove the specific movie and modify the array.
-  } 
+  //   }
+  //   this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID); //remove the specific movie and modify the array.
+  // } 
+  }
 
   isInWatchlist(email: string, imdbID: any): boolean {
     return this.watchlists[email] && this.watchlists[email].includes(imdbID); 

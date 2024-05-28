@@ -43,7 +43,6 @@
   
   .movie-card-back {
     transform: rotateY(180deg);
-    margin-top: 50px;
     padding: 20px;
     background-color: #f1f1f1;
     text-align: left;
@@ -53,3 +52,12 @@
     margin-top: 10px;
   }
   
+
+  .emptyWatchlist
+  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }

@@ -3,14 +3,15 @@
   <div *ngFor="let movie of movies" class="movie-card col-md-4">
     <div class="movie-card-inner">
       <div class="movie-card-front">
-        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.image" alt="{{ movie.title }}">
       </div>
       <div class="movie-card-back">
         <h3>{{ movie.title }}</h3>
         <p>{{ movie.release_date }}</p>
         <p>{{ movie.overview }}</p>
+        <p>{{movie.poster_path}}</p>
         <p>IMDB Rating: {{ movie.vote_average }}</p>
-        <button (click)="removeFromWatchlist(movie.id)">Remove from Watchlist</button>
+        <button (click)="removeFromWatchlist(movie)">Remove from Watchlist</button>
       </div>
     </div>
   </div>

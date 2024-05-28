@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   email: string | any;
   password: string | any;
   private token: string |null=null;
+  private userId: string | null = null;
   isLoggedIn: boolean = false;
   private tokenExpirationTimer: any;
 
@@ -42,20 +43,16 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  // onLogin() {
-  //   if(this.loginForm.valid){
-  //     const email=this.loginForm.value.email;
-  //     const password=this.loginForm.value.password;
-  //   this.authService.signin(this.email, this.password);
-  // }}
+  
   login(): void {
-    this.http.post<{ token: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
+    this.http.post<{ token: string,userId: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
       .subscribe(res => {
         const token = res.token;
+      
+        console.log(res)
         if (token) {
         this.token = token;
-        //save token to local storage
-        localStorage.setItem('token', token);
+         localStorage.setItem('token', token);
         this.isLoggedIn = true;
         //get token from local storage
         localStorage.getItem('token')
@@ -63,31 +60,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
         this.authService.login(this.loginForm.value.email, token);
       }
-      //   const user = res.find((a: any) => {
-      //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-      //   });
-      //   if (user) {
-      //     alert('Login Successful');
-      //     this.authService.login(this.loginForm.value.email); // Update user's authentication state
-         
-      //     this.loginForm.reset();
-      //     this.router.navigate(["home"]); // Navigate to the desired page after login
-      //   } else {
-      //     alert("User not found");
-      //   }
+    
       }, err => {
         alert("Something went wrong");
        });
        
     }
-    // private startTokenExpirationTimer(): void {
-    //   const tokenExpirationTime = 30 * 1000; // 30 seconds
-    //   this.tokenExpirationTimer = timer(tokenExpirationTime).subscribe(() => {
-    //     this.token = null;
-    //     localStorage.removeItem('token');
-    //     // Display modal or perform other actions here
-    //     alert("Login session has expired...")
-    //     this.authService.logout();
-    //   });
-    // }
-  }                                                                        
+  }

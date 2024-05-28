@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieCommunicationService } from 'src/app/services/MovieComservice/moviecomservice.service';
 import { AuthService } from 'src/app/services/AuthService/auth-service.service';
+import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 
 @Component({
  selector: 'app-navbar',
@@ -9,12 +10,16 @@ import { AuthService } from 'src/app/services/AuthService/auth-service.service';
  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
  isLoggedIn: boolean = false;
  userEmail: string = '';
  searchQuery: string = '';
  token: string | null = null; // Initialize token variable
+ id: string = '';
+ 
 
- constructor(private authService: AuthService,private movieCommunicationService: MovieCommunicationService , private router: Router) { }
+ constructor(private authService: AuthService,private movieCommunicationService: MovieCommunicationService , private router: Router, private watchlistService: WatchlistService){
+}
 
  ngOnInit(): void {
 
@@ -36,6 +41,7 @@ export class NavbarComponent implements OnInit {
      this.userEmail = this.authService.getLoggedInUserEmail();
    }
  }
+ 
 
  logout(): void {
    this.authService.logout();
@@ -49,4 +55,9 @@ export class NavbarComponent implements OnInit {
  navigateHome(): void {
    this.router.navigate(['/home']);
  }
+ showMovies(): void
+ {
+  this.watchlistService.getWatchlist(this.id)
+ }
+
 }

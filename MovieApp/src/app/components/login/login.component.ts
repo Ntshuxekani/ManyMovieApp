@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   private token: string |null=null;
   private userId: string | null = null;
   isLoggedIn: boolean = false;
-  private tokenExpirationTimer: any;
+  //private tokenExpirationTimer: any;
 
   constructor(
     private formbuilder: FormBuilder,

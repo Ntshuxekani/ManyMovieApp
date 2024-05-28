@@ -14,9 +14,18 @@ export class DeleteWatchlistService {
 
   }
 
+  getMovieDetails(id: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    
+    return this.http.get(url);
+
+  }
+
   deleteItem(id: number): Observable<any> {
     const url = `${this.apiUrl}/${id}`; // Assuming your API endpoint for deleting items
     return this.http.delete(url);
   }
+
+
 
 }

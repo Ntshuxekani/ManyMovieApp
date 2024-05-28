@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/AuthService/auth-service.service';
 import { WatchlistService } from 'src/app/services/watchlistservice/watchlist.service';
 import { MovieService } from 'src/app/services/movieservice/movie-service.service';
+import { DeleteWatchlistService } from 'src/app/services/delete-watchlist.service';
 
 @Component({
   selector: 'app-watchlist',
@@ -15,7 +16,8 @@ export class WatchlistComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private watchlistService: WatchlistService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private deleteWatchlistService: DeleteWatchlistService
   ) { }
 
   ngOnInit(): void {
@@ -37,5 +39,18 @@ export class WatchlistComponent implements OnInit {
     this.watchlistService.removeFromWatchlist(userEmail, imdbID);
     this.movies = this.movies.filter(movie => movie.id !== imdbID);
   }
+
+  deleteItem(id: number): void {
+    this.deleteWatchlistService.deleteItem(id).subscribe(
+      () => {
+        console.log('movie deleted');
+        // Item deleted successfully, perform any necessary actions
+      },
+      error => {
+        console.error('Error deleting the movie', error);
+      }
+    );
+  }
+
 
 }

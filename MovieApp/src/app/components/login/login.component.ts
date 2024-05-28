@@ -49,8 +49,6 @@ export class LoginComponent implements OnInit {
         const token = res.token;
       
         console.log(res)
-    
-        console.log(this.authService.getUserId())
         if (token) {
         this.token = token;
          localStorage.setItem('token', token);

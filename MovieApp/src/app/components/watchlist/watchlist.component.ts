@@ -19,23 +19,37 @@ export class WatchlistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const userEmail = this.authService.getLoggedInUserEmail();
-    this.watchlist = this.watchlistService.getWatchlist(userEmail);
-    this.getMoviesDetails();
-  }
-
-  getMoviesDetails(): void {
-    this.watchlist.forEach(id => {
-      this.movieService.getMovieDetails(id).subscribe((data: any) => {
-        this.movies.push(data);
-      });
+    // const userEmail = this.authService.getLoggedInUserEmail();
+    // this.watchlist = this.watchlistService.getWatchlist(userEmail);
+    // this.getMoviesDetails();
+    const userId = this.authService.getUserId(); // Assuming you have this method
+    this.watchlistService.getMoviesByUserId(userId).subscribe((data: any[]) => {
+      this.movies = data;
     });
   }
+  
 
-  removeFromWatchlist(imdbID: string): void {
+  // getMoviesDetails(): void {
+  //   this.watchlist.forEach(id => {
+  //     this.movieService.getMovieDetails(id).subscribe((data: any) => {
+  //       this.movies.push(data);
+  //     });
+  //   });
+  // }
+
+
+  removeFromWatchlist(imdbID: any): void {
     const userEmail = this.authService.getLoggedInUserEmail();
-    this.watchlistService.removeFromWatchlist(userEmail, imdbID);
-    this.movies = this.movies.filter(movie => movie.id !== imdbID);
+    const userId = this.authService.getUserId(); // Assuming you have this method
+    this.watchlistService.deleteMoviesByUserId(userId).subscribe((data: any[]) => {
+      this.movies = data;
+      this.movies = this.movies.filter(movie => movie.id !== imdbID);
+
+     
+    });
+
+  //   this.watchlistService.removeFromWatchlist(userEmail, imdbID);
+  //   this.movies = this.movies.filter(movie => movie.id !== imdbID);
   }
 
 }

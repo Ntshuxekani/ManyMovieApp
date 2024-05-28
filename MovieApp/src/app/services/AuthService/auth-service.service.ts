@@ -14,40 +14,26 @@ export class AuthService {
   private isLoggedIn: boolean = false;
   private loggedInUserEmail: string = '';
   authChanged = new Subject<boolean>();
-  private user_id?: string;
+  // private user_id?: string | undefined;
+  private user_id: any;
    // Subject for notifying authentication state changes
 
   constructor(private http:HttpClient, private router:Router) { }
 
   login(email: string, token: string): void {
+    this.user_id = this.extractUserIdFromToken(token); // Extract and store the user ID
+    console.log(this.user_id);
     this.isLoggedIn = true;
     this.token = token;
+    console.log('login the'+ token);
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
     localStorage
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
-//   signin(email: string,password:string){
-//     this.http.post<{ token: string }>('http://localhost:8080/api/v1/auth/login',{
-//    "email":"Sm@gmail.com","password":"12345678"
-// })
-//       .subscribe(response => {
-//         const token = response.token;
-//         if (token) {
-//           this.token = token;
-//           // this.authStatusListener.next(true);
-//           localStorage.setItem('token', token);
-//           this.loggedInUserEmail = email;
-//           localStorage.setItem('loggedInUserEmail', email);
-//           this.router.navigate(['/landing-page']);
-          
-
-//         }
-//       });
-//   }
 
   logout(): void {
-    this.user_id='';
+    this.user_id=null;
     this.isLoggedIn = false;
     this.token = null;
     this.loggedInUserEmail = '';
@@ -59,6 +45,7 @@ export class AuthService {
 
   getToken(): string | null {
     return this.token;
+    console.log(this.token);
   }
 
   isAuthenticated(): boolean {
@@ -73,6 +60,8 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
+
+
   getLoggedInUserEmail(): string {
     return this.loggedInUserEmail;
   }
@@ -80,15 +69,16 @@ export class AuthService {
     return this.user_id
   }
 
-  // initAuth(): void {
-  //   const userEmail = localStorage.getItem('loggedInUserEmail');
-  //   const token = localStorage.getItem('token')
-  //   if (userEmail && token) {
-  //     this.login(userEmail, token);
-  //     this.token=token;
-  //     console.log('Login service this' + token)
-  //   }
-  // }
+  private extractUserIdFromToken(token: string): number | null {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.id || null; // Assuming the user ID is stored in the "id" field
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
     const token = localStorage.getItem('token');

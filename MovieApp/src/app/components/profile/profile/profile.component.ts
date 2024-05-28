@@ -38,6 +38,7 @@ export class ProfileComponent {
   getUserDetails(): void {
     this.profileService.getUserById(this.userId).subscribe(response => {
       this.userForm.patchValue(response);
+      console.log(this.userForm)
     }, error => {
       console.error('Error fetching user details', error);
     });

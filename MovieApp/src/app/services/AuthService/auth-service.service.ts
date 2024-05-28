@@ -23,10 +23,8 @@ export class AuthService {
 
   login(email: string, token: string): void {
     this.user_id = this.extractUserIdFromToken(token); // Extract and store the user ID
-    console.log(this.user_id);
     this.isLoggedIn = true;
     this.token = token;
-    console.log('login the'+ token);
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
     this.isLoggedInSubject.next(true);
@@ -50,7 +48,7 @@ export class AuthService {
 
   getToken(): string | null {
     return this.token;
-    console.log(this.token);
+   
   }
 
   isAuthenticated(): boolean {

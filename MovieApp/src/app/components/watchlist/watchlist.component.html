@@ -1,11 +1,11 @@
-<div class="watchlist row">
-  <h2>My Watchlist</h2>
+<div class="container" style="padding-top: 90px;">
+<div class="movie-cards row">
   <div *ngFor="let movie of movies" class="movie-card col-md-4">
     <div class="movie-card-inner">
       <div class="movie-card-front">
         <img [src]="'https://image.tmdb.org/t/p/w500' + movie.image" alt="{{ movie.title }}">
       </div>
-      <div class="movie-card-back">
+      <div class="movie-card-back" >
         <h3>{{ movie.title }}</h3>
         <p>{{ movie.release_date }}</p>
         <p>{{ movie.overview }}</p>
@@ -16,4 +16,4 @@
     </div>
   </div>
 </div>
-
+</div>

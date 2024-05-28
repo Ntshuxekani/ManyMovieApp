@@ -7,6 +7,8 @@ import { MovieCardComponent } from './components/moviecard/moviecard.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { ProfileComponent } from './components/profile/profile/profile.component';
+
 const routes: Routes = [
   {path:"", redirectTo:"home", pathMatch:"full"},
   {path:"register",component:RegisterComponent},
@@ -15,7 +17,8 @@ const routes: Routes = [
   { path: 'watchlist', component: WatchlistComponent },
   {path:'landing-page',component:LandingPageComponent},
   {path:"review-movie", component:ReviewMovieComponent},
-  {path:"details/:id",component:MovieDetailsComponent}
+  {path:"details/:id",component:MovieDetailsComponent},
+  {path:"profile",component:ProfileComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

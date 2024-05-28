@@ -48,10 +48,12 @@ export class AuthService {
 //   }
 
   logout(): void {
+    // login is initialy set to false
     this.isLoggedIn = false;
     this.token = null;
     this.loggedInUserEmail = '';
     localStorage.removeItem('loggedInUserEmail');
+    //clear the token if a user logged out
     localStorage.removeItem('token');
     this.authChanged.next(false);
     this.isLoggedInSubject.next(false);

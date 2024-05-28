@@ -49,15 +49,17 @@ export class LoginComponent implements OnInit {
   //   this.authService.signin(this.email, this.password);
   // }}
   login(): void {
-    this.http.post<{ token: string }>("http://localhost:8080/api/v1/auth/authenticate",this.loginForm.value)
+    this.http.post<{ token: string }>("http://localhost:8080/api/v1/auth/login",this.loginForm.value)
       .subscribe(res => {
         const token = res.token;
         if (token) {
         this.token = token;
-        this.startTokenExpirationTimer();
+        //save token to local storage
         localStorage.setItem('token', token);
         this.isLoggedIn = true;
+        //get token from local storage
         localStorage.getItem('token')
+        //if loggin is successful navigate to home page
         this.router.navigate(['/home']);
         this.authService.login(this.loginForm.value.email, token);
       }
@@ -78,14 +80,14 @@ export class LoginComponent implements OnInit {
        });
        
     }
-    private startTokenExpirationTimer(): void {
-      const tokenExpirationTime = 30 * 1000; // 30 seconds
-      this.tokenExpirationTimer = timer(tokenExpirationTime).subscribe(() => {
-        this.token = null;
-        localStorage.removeItem('token');
-        // Display modal or perform other actions here
-        alert("Login session has expired...")
-        this.authService.logout();
-      });
-    }
+    // private startTokenExpirationTimer(): void {
+    //   const tokenExpirationTime = 30 * 1000; // 30 seconds
+    //   this.tokenExpirationTimer = timer(tokenExpirationTime).subscribe(() => {
+    //     this.token = null;
+    //     localStorage.removeItem('token');
+    //     // Display modal or perform other actions here
+    //     alert("Login session has expired...")
+    //     this.authService.logout();
+    //   });
+    // }
   }                                                                        

@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { AuthService } from './services/AuthService/auth-service.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { ProfileComponent } from './components/profile/profile/profile.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent }
@@ -32,7 +33,8 @@ const routes: Routes = [
     WatchlistComponent,
     ReviewMovieComponent,
     NavbarComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

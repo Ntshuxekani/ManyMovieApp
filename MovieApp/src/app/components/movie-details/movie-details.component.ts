@@ -24,10 +24,12 @@ export class MovieDetailsComponent implements OnInit {
     if (movieId) {
       this.movieService.getMovieDetails(movieId).subscribe((data: any) => {
         this.movieDetails = data;
+        console.log('inside the movie details' + movieId)
       });
 
       this.movieService.getSimilarMovies(movieId).subscribe((data: any) => {
         this.similarMovies = data.results;
+       
       });
     }
   }

@@ -1,4 +1,5 @@
-<div class="navbar">
+<!-- navbar.component.html -->
+<div class="navbar" [ngClass]="{'logged-in': isLoggedIn, 'logged-out': !isLoggedIn}">
   <div class="navbar-brand">
     <h1 class="logo" (click)="navigateHome()">REELRELISH</h1>
   </div>
@@ -8,10 +9,12 @@
   </div> 
   <span *ngIf="isLoggedIn">
     <button routerLink="/watchlist">My Watchlist</button> 
-    Welcome, {{ userEmail }}! <button (click)="logout()">Logout</button>
+     <button (click)="logout()">Logout</button>
+     <img src="assets/avatar.jpg" routerLink="/profile" alt="user" class="profile">
   </span>
   <span *ngIf="!isLoggedIn">
     <button routerLink="/register" class="login-btn">Register</button>
     <button routerLink="/login" class="login-btn">Login</button>
   </span>
 </div>
+

@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class AuthService {
   private token: string |null=null;
   private authStatusListener = new BehaviorSubject<boolean>(false);
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   
 
   private isLoggedIn: boolean = false;
@@ -28,18 +29,22 @@ export class AuthService {
     console.log('login the'+ token);
     this.loggedInUserEmail = email;
     localStorage.setItem('loggedInUserEmail', email);
-    localStorage
+    this.isLoggedInSubject.next(true);
+    this.isLoggedInSubject.next(true);
     this.authChanged.next(true); // Notify subscribers that authentication state has changed
   }
 
   logout(): void {
-    this.user_id=null;
+    // login is initialy set to false
     this.isLoggedIn = false;
     this.token = null;
     this.loggedInUserEmail = '';
     localStorage.removeItem('loggedInUserEmail');
+    //clear the token if a user logged out
     localStorage.removeItem('token');
     this.authChanged.next(false);
+    this.isLoggedInSubject.next(false);
+    this.isLoggedInSubject.next(false);
     this.router.navigate(['/login']); // Notify subscribers that authentication state has changed
   }
 

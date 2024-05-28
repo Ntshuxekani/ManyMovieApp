@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     });
 
     const token = localStorage.getItem('token');
+    console.log(token);
     if (token) {
       // Proceed as if the user is logged in
       this.router.navigate(['/home']);
@@ -53,7 +54,9 @@ export class LoginComponent implements OnInit {
         this.token = token;
          localStorage.setItem('token', token);
         this.isLoggedIn = true;
+        //get token from local storage
         localStorage.getItem('token')
+        //if loggin is successful navigate to home page
         this.router.navigate(['/home']);
         this.authService.login(this.loginForm.value.email, token);
       }

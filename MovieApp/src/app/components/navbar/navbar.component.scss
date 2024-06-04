@@ -74,11 +74,13 @@
     background-color: #777; /* Darker shade of grey on hover */
   }
   .profile{
-    width: 60px;  
-    height: 60px;
-    object-fit: cover; 
-    border-radius: 50%;
-    margin-left: 20px;
+    // width: 60px;  
+    // height: 60px;
+    // object-fit: cover; 
+    // border-radius: 50%;
+    // margin-left: 20px;
+    font-size: 30px;
+    align-items: center;
   }
 
   /* navbar.component.scss */

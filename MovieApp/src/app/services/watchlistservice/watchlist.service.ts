@@ -65,9 +65,10 @@ export class WatchlistService {
        }// Add userId to the request body
       };
       console.log("the movie details" + imdbID)
+      console.log(userId)
       this.http.post(`${this.url}/${userId}`,requestBody).subscribe(response=>{console.log(response);}, error=>{console.log("error",error);});
     // }else{
-      // alert('movie added already');
+    //   alert('movie added already');
       
 
     // }

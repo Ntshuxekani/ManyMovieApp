@@ -10,7 +10,8 @@
   <span *ngIf="isLoggedIn">
     <button routerLink="/watchlist">My Watchlist</button> 
      <button (click)="logout()">Logout</button>
-     <img src="assets/avatar.jpg" routerLink="/profile" alt="user" class="profile">
+     <!-- <img src="assets/avatar.jpg" routerLink="/profile" alt="user" class="profile"> -->
+     <i class="bi bi-person-circle profile" routerLink="/profile"></i>
   </span>
   <span *ngIf="!isLoggedIn">
     <button routerLink="/register" class="login-btn">Register</button>

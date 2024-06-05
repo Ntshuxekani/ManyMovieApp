@@ -48,7 +48,7 @@ export class AuthService {
 
   getToken(): string | null {
     return this.token;
-    console.log(this.token);
+   
   }
 
   isAuthenticated(): boolean {
@@ -85,8 +85,11 @@ export class AuthService {
   initAuth(): void {
     const userEmail = localStorage.getItem('loggedInUserEmail');
     const token = localStorage.getItem('token');
+
     if (userEmail && token) {
       this.login(userEmail, token);
+      this.user_id = this.extractUserIdFromToken(token);
+      console.log(this.user_id);
     } else {
       console.log('No token found in local storage.');
     }

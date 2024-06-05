@@ -78,7 +78,7 @@ export class WatchlistService {
       },
       error=>{console.log("error",error);});
     // }else{
-      // alert('movie added already');
+    //   alert('movie added already');
       
 
     // }

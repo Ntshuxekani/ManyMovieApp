@@ -17,8 +17,8 @@ email: any;
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(8) , Validators.pattern('[a-zA-Z0-9_]{0,9}$/')]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
   passwordsMatch() {
@@ -27,9 +27,7 @@ email: any;
  
    numUsers=0;
   register(){
-    // this.http.get('http://localhost:3000/signupUsersList').toPromise().then(
-    //   response=>{var numberOfUsers = response as any[];
-    //     this.numUsers=numberOfUsers.length;
+  
 
         let newUser=this.registerForm.value;
         newUser["id"]=this.numUsers+1;
@@ -39,8 +37,8 @@ email: any;
           alert("Registration Successfull");
          
           this.registerForm.reset();
-          this.router.navigate(['home']);// redirect to login page after signup
-        },err=>{console.log("something is wrong");})
+          this.router.navigate(['/login']);// redirect to login page after signup
+        },err=>{console.log("Please check your details");})
       //});
       
     

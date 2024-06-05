@@ -9,6 +9,9 @@ import { ProfileService } from 'src/app/services/profileService/profile.service'
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+FileChange($event: Event) {
+throw new Error('Method not implemented.');
+}
   
   userForm!: FormGroup;
   userId!: any
@@ -31,8 +34,8 @@ export class ProfileComponent {
     this.userForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+     });
   }
 
   getUserDetails(): void {

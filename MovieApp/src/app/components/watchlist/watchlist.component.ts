@@ -19,19 +19,18 @@ export class WatchlistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // const userEmail = this.authService.getLoggedInUserEmail();
-    // this.watchlist = this.watchlistService.getWatchlist(userEmail);
-    // this.getMoviesDetails();
+   
     const userId = this.authService.getUserId(); // Assuming you have this method
     this.watchlistService.getMoviesByUserId(userId).subscribe((data: any[]) => {
       this.movies = data;
+      
     });
   }
 
   removeFromWatchlist(movieId: any): void {
     this.watchlistService.deleteMovie(movieId).subscribe(
       () => {
-        console.log('Movie removed successfully');
+        alert('Movie removed successfully');
         window.location.reload();
         // Optionally, update the UI to reflect the deletion
       },
@@ -39,19 +38,5 @@ export class WatchlistComponent implements OnInit {
         console.error('Error removing movie', error);
       }
     );
-
-
-  //   const userEmail = this.authService.getLoggedInUserEmail();
-  //   const userId = this.authService.getUserId(); // Assuming you have this method
-  //   this.watchlistService.deleteMovie().subscribe((data: any[]) => {
-  //     this.movies = data;
-  //     //this.movies = this.movies.filter(movie => movie.id !== imdbID);
-
-     
-  //   });
-
-  // //   this.watchlistService.removeFromWatchlist(userEmail, imdbID);
-  // //   this.movies = this.movies.filter(movie => movie.id !== imdbID);
-  // }
 
 }}

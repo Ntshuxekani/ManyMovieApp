@@ -40,7 +40,7 @@ email: any;
          
           this.registerForm.reset();
           this.router.navigate(['home']);// redirect to login page after signup
-        },err=>{console.log("something is wrong");})
+        },err=>{alert("User Already Exist");})
       //});
       
     

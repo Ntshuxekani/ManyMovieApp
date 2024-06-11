@@ -47,7 +47,7 @@
   .login-btn {
     padding: 5px 10px;
     margin-left: 10px;
-    background-color: #28a745;
+    background-color: #1b7cbd;
     color: white;
     border: none;
     border-radius: 5px;
@@ -64,7 +64,7 @@
   .search button,
   .register-btn,
   .login-btn {
-    background-color: #555; /* Use a shade of grey for buttons */
+    background-color: #585050; /* Use a shade of grey for buttons */
   }
   
   /* Add more specific styles for buttons on hover */
@@ -74,11 +74,13 @@
     background-color: #777; /* Darker shade of grey on hover */
   }
   .profile{
-    width: 60px;  
-    height: 60px;
-    object-fit: cover; 
-    border-radius: 50%;
-    margin-left: 20px;
+    // width: 60px;  
+    // height: 60px;
+    // object-fit: cover; 
+    // border-radius: 50%;
+    // margin-left: 20px;
+    font-size: 30px;
+    align-items: center;
   }
 
   /* navbar.component.scss */
@@ -91,7 +93,7 @@
 }
 
 .navbar.logged-in {
-  background-color: green;
+  background-color: rgb(49, 104, 167);
 }
 
 .navbar.logged-out {
@@ -127,4 +129,6 @@
 
 .navbar .login-btn {
   margin-left: 10px;
+  
+  
 }

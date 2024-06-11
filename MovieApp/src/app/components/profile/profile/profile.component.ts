@@ -10,6 +10,9 @@ import { ProfileService } from 'src/app/services/profileService/profile.service'
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+FileChange($event: Event) {
+throw new Error('Method not implemented.');
+}
   
   
   constructor(

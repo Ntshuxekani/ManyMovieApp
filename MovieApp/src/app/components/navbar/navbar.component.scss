@@ -5,7 +5,7 @@
     align-items: center;
     padding: 10px 20px;
     background-color: #333;
-    color: white;
+    color: rgb(255, 255, 255);
     position: fixed;
     z-index: 2;
     width: 100vw;
@@ -50,7 +50,7 @@
     background-color: #1b7cbd;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
   }
   
@@ -71,7 +71,7 @@
   .search button:hover,
   .register-btn:hover,
   .login-btn:hover {
-    background-color: #777; /* Darker shade of grey on hover */
+    background-color: #b1b0b0; /* Darker shade of grey on hover */
   }
   .profile{
     // width: 60px;  
@@ -98,7 +98,8 @@
 
 .navbar.logged-out {
   background-color: 495057;
-  border-radius: 5px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .navbar .navbar-brand .logo {
@@ -131,4 +132,7 @@
   margin-left: 10px;
   
   
+}
+button:hover{
+  background-color: rgb(189, 212, 224);
 }

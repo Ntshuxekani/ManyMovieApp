@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class WatchlistService {
   private url='http://localhost:8080/api/v1/auth/movie';
   private watchlists: { [email: string]: string[] } = {};
-  userId: number | null = null;
+  userId: string | null = null;
   movies:any[]=[];
 
 
@@ -22,8 +22,9 @@ export class WatchlistService {
   getMoviesByUserId(userId: number): Observable<any> {
     return this.http.get<any>(`${this.url}/user/${userId}`);
   }
-  deleteMoviesByUserId(userId: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}/user/${userId}`);
+  
+  deleteMovie(movieId: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/movie/${movieId}`);
   }
  // /api/v1/auth/movie/user/{id}
 
@@ -31,19 +32,18 @@ export class WatchlistService {
     if (!this.watchlists[email]) {
       this.watchlists[email] = [];
     }
-    // this.http.get(`${this.url}/user/${this.userId}`)
-    // .subscribe(response=>{console.log(response);   
-    // },
-    //  error=>{console.log("error",error);});
+  
     
     return this.watchlists[email];
     
   } 
   
   addToWatchlist(imdbID: any): void {
-    console.log("id id" + imdbID.id)
-    console.log(imdbID)
     const email= '';
+    if (this.isInWatchlist(email, imdbID)) {
+      console.log('Movie already exists in the watchlist.');
+      return;
+    }
     const userId = this.userId;
     if (!userId) {
       console.log('getting user ID' + userId);
@@ -51,10 +51,14 @@ export class WatchlistService {
       
       return;
     }
-    
-    console.log(imdbID.id,imdbID.original_title);
+    if (this.isInWatchlist(userId, imdbID)) {
+      console.log('Movie already exists in the watchlist.');
+      return;
+    }
+      console.log(imdbID.id,imdbID.original_title);
+
     const { id, original_title, overview, poster_path, vote_average } = imdbID;
-    console.log("the movie details id" + id)
+
  
       const requestBody = {
         id,
@@ -65,10 +69,16 @@ export class WatchlistService {
        user:{
         id:userId
        }// Add userId to the request body
+
       };
-      console.log("the movie details" + imdbID)
-      console.log(userId)
-      this.http.post(`${this.url}/${userId}`,requestBody).subscribe(response=>{console.log(response);}, error=>{console.log("error",error);});
+      this.http.post(`${this.url}/${userId}`,requestBody)
+      .subscribe(response=>{console.log(response);
+      if (!this.watchlists[userId]) {
+          this.watchlists[userId] = [];
+        }
+        this.watchlists[userId].push(imdbID);
+      },
+      error=>{console.log("error",error);});
     // }else{
     //   alert('movie added already');
       
@@ -77,16 +87,17 @@ export class WatchlistService {
   }
 // Removie the movie
   removeFromWatchlist(email: string, imdbID: any): void {
-    if (!this.watchlists[email]) {
-      return;
-    }else
-    {
-      
-    }
-    this.watchlists[email] = this.watchlists[email].filter(id => id !== imdbID); //remove the specific movie and modify the array.
-  } 
+    
+    this.http.delete(`${this.url}/`).subscribe(response => {
+      console.log("Movie removed successfully");
+    }, error => {
+      console.log("Error removing movie", error);
+    });
+  
+  }
 
   isInWatchlist(email: string, imdbID: any): boolean {
     return this.watchlists[email] && this.watchlists[email].includes(imdbID); 
+    
   }
 }

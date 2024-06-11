@@ -21,50 +21,24 @@ export class WatchlistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // const userEmail = this.authService.getLoggedInUserEmail();
-    // this.watchlist = this.watchlistService.getWatchlist(userEmail);
-    // this.getMoviesDetails();
+   
     const userId = this.authService.getUserId(); // Assuming you have this method
     this.watchlistService.getMoviesByUserId(userId).subscribe((data: any[]) => {
       this.movies = data;
+      
     });
   }
-  
 
-  // getMoviesDetails(): void {
-  //   this.watchlist.forEach(id => {
-  //     this.movieService.getMovieDetails(id).subscribe((data: any) => {
-  //       this.movies.push(data);
-  //     });
-  //   });
-  // }
-
-
-  removeFromWatchlist(imdbID: any): void {
-    const userEmail = this.authService.getLoggedInUserEmail();
-    const userId = this.authService.getUserId(); // Assuming you have this method
-    this.watchlistService.deleteMoviesByUserId(userId).subscribe((data: any[]) => {
-      this.movies = data;
-      this.movies = this.movies.filter(movie => movie.id !== imdbID);
-
-     
-    });
-
-  //   this.watchlistService.removeFromWatchlist(userEmail, imdbID);
-  //   this.movies = this.movies.filter(movie => movie.id !== imdbID);
-  }
-
-  deleteItem(id: number): void {
-    this.deleteWatchlistService.deleteItem(id).subscribe(
+  removeFromWatchlist(movieId: any): void {
+    this.watchlistService.deleteMovie(movieId).subscribe(
       () => {
-        console.log('movie deleted');
-        // Item deleted successfully, perform any necessary actions
+        alert('Movie removed successfully');
+        window.location.reload();
+        // Optionally, update the UI to reflect the deletion
       },
       error => {
-        console.error('Error deleting the movie', error);
+        console.error('Error removing movie', error);
       }
     );
-  }
 
-
-}
+}}

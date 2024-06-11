@@ -57,6 +57,10 @@ export class NavbarComponent implements OnInit {
 
  searchMovies(): void {
    this.movieCommunicationService.setSearchQuery(this.searchQuery); // Use the service to set the search query
+   if(!this.movieCommunicationService.setSearchQuery)
+   {
+      alert('Your result is not found');
+   }
  }
 
  navigateHome(): void {

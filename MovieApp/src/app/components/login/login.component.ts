@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       }
     
       }, err => {
-        alert("Something went wrong");
+        alert("Invalid details, please try again.");
        });
        
     }

@@ -46,11 +46,13 @@ export class WatchlistService {
     const email= '';
     const userId = this.userId;
     if (!userId) {
-      console.error('User ID is missing.');
+      console.log('getting user ID' + userId);
+      //alert('You have not logged in, please log in...');
+      
       return;
     }
     
-      console.log(imdbID.id,imdbID.original_title);
+    console.log(imdbID.id,imdbID.original_title);
     const { id, original_title, overview, poster_path, vote_average } = imdbID;
     console.log("the movie details id" + id)
  

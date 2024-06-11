@@ -10,5 +10,6 @@ export class MovieCommunicationService {
 
   setSearchQuery(query: string): void {
     this.searchQuerySource.next(query);
+    
   }
 }

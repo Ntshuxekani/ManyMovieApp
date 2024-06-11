@@ -18,6 +18,7 @@ export class DeleteWatchlistService {
     const url = `${this.apiUrl}/${id}`;
     
     return this.http.get(url);
+    
 
   }
 

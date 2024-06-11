@@ -40,5 +40,6 @@ export class WatchlistComponent implements OnInit {
         console.error('Error removing movie', error);
       }
     );
+    
 
 }}

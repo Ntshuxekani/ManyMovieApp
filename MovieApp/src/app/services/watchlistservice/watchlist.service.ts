@@ -46,13 +46,13 @@ export class WatchlistService {
     }
     const userId = this.userId;
     if (!userId) {
-      console.log('getting user ID' + userId);
-      //alert('You have not logged in, please log in...');
+
+      alert('You have not logged in, please log in...');
       
       return;
     }
     if (this.isInWatchlist(userId, imdbID)) {
-      console.log('Movie already exists in the watchlist.');
+      alert('Movie already exists in the watchlist.');
       return;
     }
       console.log(imdbID.id,imdbID.original_title);

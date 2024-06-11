@@ -34,7 +34,7 @@ email: any;
 
         this.http.post<any>("http://localhost:8080/api/v1/auth/register",newUser)
         .subscribe(res=>{
-          alert("Registration Successfull");
+          alert("Registration Successful");
          
           this.registerForm.reset();
           this.router.navigate(['/login']);// redirect to login page after signup
